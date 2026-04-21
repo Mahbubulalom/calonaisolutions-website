@@ -449,19 +449,46 @@ section.pad-sm{padding:80px 0;}
 .hero-eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent);}
 .hero-display{
   font-family:'Geist',sans-serif;
-  font-weight:800;
-  font-size: clamp(56px, 10vw, 152px);
-  line-height: 0.94;
+  font-weight:700;
+  font-size: clamp(40px, 6.8vw, 104px);
+  line-height: 1.02;
   letter-spacing: -0.035em;
   color:#fff;
   margin:0 0 32px;
   text-shadow: 0 2px 40px rgba(0,0,0,0.5);
+  max-width: 16ch;
 }
 .hero-display .chev{
   color:var(--accent);
   display:inline-block;
   transform:translateY(-0.02em) scaleY(1.05);
   text-shadow: 0 0 40px rgba(245,176,138,0.6);
+}
+.hero-display .chev-word{
+  background:linear-gradient(135deg, #F5B08A 0%, #E8735C 60%, #F5B08A 100%);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; color:transparent;
+  background-size:200% 100%;
+  animation:hueshift 8s ease-in-out infinite;
+  font-style:italic;
+  font-family:'Instrument Serif',serif;
+  font-weight:400;
+  letter-spacing:-0.01em;
+}
+.hero-display .accent-word{
+  background:linear-gradient(135deg, var(--accent-3) 0%, var(--accent) 50%, var(--accent-2) 100%);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; color:transparent;
+  background-size:200% 100%;
+  animation:hueshift 8s ease-in-out infinite reverse;
+  font-style:italic;
+  font-family:'Instrument Serif',serif;
+  font-weight:400;
+  letter-spacing:-0.01em;
+}
+@keyframes hueshift{
+  0%,100%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
 }
 .hero-sub{
   font-family:'Geist',sans-serif;
@@ -959,3 +986,169 @@ form.diagnostic button{justify-self:start; margin-top:8px;}
   }
   .real-work-img{ aspect-ratio:16/10; }
 }
+
+/* ---------- NEW: supporting copy & CTAs ---------- */
+.cred-sub{
+  margin-top:14px;
+  font-family:'Geist',sans-serif; font-size:15px; line-height:1.6;
+  color:#9AA0B0; max-width:62ch; text-align:center; margin-left:auto; margin-right:auto;
+}
+.friction-result{
+  margin-top:64px;
+  font-family:'Instrument Serif',serif; font-weight:400;
+  font-size:clamp(22px, 2.2vw, 30px); line-height:1.35;
+  color:#DDE1E8; max-width:70ch;
+}
+.friction-result em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--accent-3),var(--accent));
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; color:transparent;
+}
+.lane{ display:flex; flex-direction:column; position:relative; overflow:hidden; }
+.lane::before{
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(900px 300px at 0% 0%, rgba(91,200,232,0.08), transparent 60%);
+  opacity:0; transition:opacity .35s;
+  pointer-events:none;
+}
+.lane:hover::before{ opacity:1; }
+.lane-sub{
+  font-family:'Instrument Serif',serif; font-style:italic; font-weight:400;
+  font-size:15px; color:var(--accent-3); letter-spacing:0.01em;
+  margin:0 0 18px;
+  opacity:0.85;
+}
+.lane-cta{
+  display:inline-flex; align-items:center; gap:10px;
+  margin-top:auto; padding-top:24px;
+  font-family:'Geist',sans-serif; font-size:14px; font-weight:600;
+  color:var(--accent); text-decoration:none;
+  border-top:1px solid var(--line);
+  padding-top:22px; margin-top:24px;
+  transition:color .2s, gap .25s;
+}
+.lane-cta .arr{ transition:transform .25s; display:inline-block; }
+.lane-cta:hover{ color:var(--accent-3); gap:14px; }
+.lane-cta:hover .arr{ transform:translateX(3px); }
+.sectors-note{
+  margin-top:48px;
+  font-family:'Instrument Serif',serif; font-weight:400;
+  font-size:clamp(18px, 1.6vw, 22px); line-height:1.5;
+  color:#B8BECA; max-width:64ch;
+}
+
+/* ---------- VIBRANCE: section accents & glows ---------- */
+
+/* Soft animated gradient glow painted behind the friction cards */
+.symptoms{
+  position:relative;
+}
+.symptoms::before{
+  content:""; position:absolute; inset:-40px;
+  background:
+    radial-gradient(600px 300px at 10% 0%, rgba(91,200,232,0.08), transparent 70%),
+    radial-gradient(500px 280px at 90% 100%, rgba(245,176,138,0.07), transparent 70%);
+  filter:blur(24px);
+  z-index:-1;
+  pointer-events:none;
+}
+
+/* Gradient accent on the section number badge */
+.num{
+  background:linear-gradient(135deg, var(--accent) 0%, #F5B08A 100%);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; color:transparent;
+  font-weight:600;
+}
+
+/* Vibrant glow border on lane cards */
+.lane{
+  background:linear-gradient(180deg, var(--ink-2) 0%, #0A0614 100%);
+  transition:border-color .3s, transform .35s, box-shadow .35s;
+}
+.lane:hover{
+  border-color:rgba(91,200,232,0.3);
+  box-shadow:
+    0 20px 60px -20px rgba(91,200,232,0.25),
+    0 0 0 1px rgba(91,200,232,0.15) inset;
+  transform:translateY(-4px);
+}
+
+/* Process step numbers in gradient */
+.step .n{
+  background:linear-gradient(135deg, var(--accent) 0%, var(--accent-3) 100%);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; color:transparent;
+}
+
+/* Primary button — richer gradient */
+.btn-primary{
+  background:linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  box-shadow:
+    0 8px 32px -6px rgba(91,200,232,0.5),
+    0 0 0 1px rgba(143,224,242,0.25) inset;
+}
+.btn-primary:hover{
+  box-shadow:
+    0 14px 44px -6px rgba(91,200,232,0.7),
+    0 0 0 1px rgba(143,224,242,0.4) inset;
+}
+
+/* Section-head emphasis — make 'em' inside h2 pop */
+.section-head h2 em, .h2 em{
+  font-style:italic;
+  background:linear-gradient(135deg, var(--accent-3) 0%, var(--accent) 45%, #F5B08A 100%);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; color:transparent;
+  background-size:180% 100%;
+}
+
+/* Subtle ambient hue panels for rhythm */
+section:nth-of-type(3n+2){
+  position:relative;
+}
+section:nth-of-type(3n+2)::before{
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(1200px 500px at 50% 0%, rgba(91,200,232,0.04), transparent 70%);
+  pointer-events:none; z-index:0;
+}
+section:nth-of-type(3n+2) > *{ position:relative; z-index:1; }
+
+/* Cta-block richer bg */
+.cta-block{
+  background:
+    radial-gradient(800px 400px at 0% 0%, rgba(91,200,232,0.08), transparent 60%),
+    radial-gradient(800px 400px at 100% 100%, rgba(245,176,138,0.07), transparent 60%),
+    linear-gradient(180deg, var(--ink-2), #0A0614);
+  border:1px solid rgba(91,200,232,0.12);
+  border-radius:16px;
+  padding:64px 56px;
+  position:relative; overflow:hidden;
+}
+.cta-block::before{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(90deg, transparent, rgba(91,200,232,0.4), transparent);
+  height:1px; top:0;
+}
+@media (max-width:880px){
+  .cta-block{ padding:40px 28px; }
+}
+
+/* Data table vibrance for "Why Calon" comparison */
+.data{ width:100%; border-collapse:collapse; }
+.data th, .data td{
+  padding:14px 16px; text-align:left; font-size:14px;
+  border-bottom:1px solid var(--line);
+}
+.data thead th{
+  font-family:'Geist Mono',monospace; font-size:11px; letter-spacing:0.18em;
+  color:var(--text-muted); text-transform:uppercase;
+  border-bottom:1px solid var(--line-2);
+}
+.data thead th:last-child{
+  color:var(--accent);
+}
+.data tbody tr:hover{ background:rgba(91,200,232,0.03); }
+.data tbody td:first-child{ color:var(--text-muted); }
+.data tbody td:last-child{ color:#fff; font-weight:500; }
