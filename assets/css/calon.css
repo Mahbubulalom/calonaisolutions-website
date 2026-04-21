@@ -260,17 +260,33 @@ section.pad-sm{padding:80px 0;}
   .nav-links{
     display:none;
     flex-direction:column;
-    position:absolute; top:100%; left:0; right:0;
-    background:rgba(5,8,15,0.97);
-    border-bottom:1px solid var(--line-2);
-    padding:12px 0 20px;
+    position:fixed; inset:0; z-index:49;
+    background:#05080F;
+    padding:120px 24px 40px;
     gap:0;
+    justify-content:flex-start;
+    align-items:center;
+    text-align:center;
+    overflow-y:auto;
   }
   .nav-links.open{display:flex;}
-  .nav-links > li{width:100%;}
+  .nav-links > li{
+    width:100%;
+    padding:22px 0;
+    border:none;
+  }
   .nav-links > li > a, .nav-links > li > button{
-    display:flex; width:100%; padding:16px 24px;
-    font-size:17px; justify-content:space-between;
+    display:inline-flex; width:auto; padding:0;
+    font-family:'Instrument Serif', serif;
+    font-weight:400;
+    font-size:34px; letter-spacing:-0.01em;
+    color:#fff;
+    justify-content:center;
+    text-align:center;
+    gap:8px;
+  }
+  .nav-links > li > button::after{
+    font-size:14px; opacity:0.55;
   }
   /* Full-screen dropdown panel on mobile */
   .nav-drop{
@@ -322,8 +338,27 @@ section.pad-sm{padding:80px 0;}
     border-radius:999px; text-decoration:none; border:none;
     box-shadow:0 6px 28px -6px rgba(91,200,232,0.45);
   }
-  .nav-burger{display:block;}
-  .nav-inner{padding:18px 20px; position:relative;}
+  /* Bottom CTA injected by JS into .nav-links */
+  .nav-main-cta{
+    width:100%;
+    margin-top:auto;
+    padding:28px 8px 8px;
+    border-top:1px solid var(--line-2);
+    list-style:none;
+  }
+  .nav-main-cta a{
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    width:100%; padding:18px 24px;
+    background:linear-gradient(135deg,#5BC8E8,#37B5D9);
+    color:#0a0e1a; font-family:'Geist',sans-serif;
+    font-size:16px; font-weight:700; letter-spacing:0.02em;
+    text-transform:uppercase;
+    border-radius:999px; text-decoration:none; border:none;
+    box-shadow:0 6px 28px -6px rgba(91,200,232,0.45);
+  }
+  .nav-burger{display:block; position:relative; z-index:60;}
+  .nav-logo{position:relative; z-index:60;}
+  .nav-inner{padding:18px 20px; position:relative; z-index:60;}
   .nav-cta{display:none;}
 }
 .nav.scrolled{

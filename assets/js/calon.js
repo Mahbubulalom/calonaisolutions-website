@@ -40,7 +40,16 @@
       e.stopPropagation();
       const open = links.classList.toggle('open');
       burger.textContent = open ? '×' : '☰';
+      document.body.style.overflow = open ? 'hidden' : '';
     });
+  }
+
+  // Inject bottom CTA into the main mobile menu (once)
+  if (links && !links.querySelector('.nav-main-cta')) {
+    const mainCta = document.createElement('li');
+    mainCta.className = 'nav-main-cta';
+    mainCta.innerHTML = `<a href="diagnostic.html">Book a diagnostic →</a>`;
+    links.appendChild(mainCta);
   }
 
   // Inject full-screen header + CTA into each mobile dropdown (once)
@@ -94,6 +103,7 @@
     document.querySelectorAll('.nav-links > li.open').forEach(el => el.classList.remove('open'));
     if (links) { links.classList.remove('open'); }
     if (burger) burger.textContent = '☰';
+    document.body.style.overflow = '';
   });
 
   // Don't close when clicking inside nav
@@ -107,6 +117,7 @@
         links.classList.remove('open');
         document.querySelectorAll('.nav-links > li.open').forEach(el => el.classList.remove('open'));
         if (burger) burger.textContent = '☰';
+        document.body.style.overflow = '';
       });
     });
   }
