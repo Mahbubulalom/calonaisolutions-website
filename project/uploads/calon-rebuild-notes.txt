@@ -1,0 +1,509 @@
+Below is the full website rebuild / rewire blueprint prompt you can use today.
+This is designed to be dropped into Notion AI, Claude, ChatGPT, or given directly to a web designer / developer / copy system so the whole site can be rebuilt in line with the real Calon business.
+It is intentionally detailed, structured, and commercially strict.
+CALON WEBSITE REBUILD / REWIRE MASTER PROMPT
+You are acting as a senior B2B positioning strategist, conversion copywriter, website architect, and commercial messaging lead.
+Your job is to completely rebuild and rewire the Calon AI Solutions website so it aligns with the company’s real operating model, real commercial direction, real ICP, and real offer structure.
+This is not a cosmetic copy tidy-up.
+This is a full strategic rebuild of the website structure, messaging, page hierarchy, offer presentation, and conversion logic.
+The final output must be:
+commercially credible
+sharp and founder-friendly
+practical, not hype-driven
+aligned to Calon’s internal OS and operating model
+easy for a designer / developer / copywriter to implement directly
+focused on converting qualified leads into strategy calls / diagnostics
+consistent across every page
+strong enough to serve as the new messaging foundation of the business
+The website must stop feeling like a broad AI agency and instead feel like a focused operational systems and automation consultancy for founder-led service businesses.
+Use the following business context as the source of truth.
+1. CORE BUSINESS POSITIONING
+Calon is positioned as:
+Operational systems and automation for founder-led service businesses.
+Calon helps founder-led service businesses replace manual operational bottlenecks with tailored systems and automation that improve:
+speed
+visibility
+efficiency
+control
+commercial performance
+Calon does not sell AI for the sake of AI.
+Calon does not position as:
+a generic AI agency
+a chatbot company
+a broad digital transformation consultancy
+a random automation freelancer
+a software studio for anything and everything
+Calon should always be positioned as:
+practical
+commercial
+operational
+systems-focused
+founder-friendly
+outcome-led
+built around real workflow problems
+The website must reflect this clearly and consistently. This positioning is explicitly defined in the Calon OS, which states the business is “operational systems and automation for founder-led service businesses,” focused on speed, visibility, and control rather than generic AI capability.
+2. SOURCE OF TRUTH: CALON OPERATING MODEL
+The website must align with the company’s actual OS / command centre structure.
+The internal operating model is:
+Lane 1 — Operational Workspace
+The control layer.A centralised operating environment that gives the client one place for:
+visibility
+ownership
+next-step control
+workflow oversight
+reporting integrity
+Lane 2 — Bespoke Workflows
+The execution layer.Tailored workflows and automation built around how the client actually operates.Examples:
+lead follow-up
+quote-to-job handover
+scheduling
+admin automation
+onboarding
+reporting logic
+invoice / delivery / ops coordination
+Lane 3 — Ongoing Optimisation and Support
+The compounding layer.Ongoing refinement, support, reporting improvements, training, and system evolution after the initial build.
+The website must clearly reflect these three lanes and make them feel like the company’s real service model, not an internal note.
+The OS explicitly defines these three lanes as the strongest offer structure and says Calon should sell connected operational systems, not isolated automation.
+3. ENTRY OFFER / COMMERCIAL MODEL
+The website must make it clear that Calon does not begin with vague “AI consulting.”
+The recommended commercial entry point is:
+Operating Bottleneck Diagnostic
+This can be phrased on-site as:
+Operating Bottleneck Diagnostic
+Workflow Diagnostic
+Strategy Call
+Diagnostic Call
+But the logic must be:
+understand the workflow
+identify the bottleneck
+map the current system
+recommend the right Phase 1 build
+define measurable improvement
+The OS makes clear that the diagnostic should lead into a defined Phase 1 build and that the business should standardise around this entry offer.
+4. CORE PHASE 1 LOGIC
+The website must reflect that Calon’s core product is not a feature set.
+The core product is an outcome-led Phase 1 build that removes one meaningful operational bottleneck and creates a measurable shift.
+Every strong Phase 1 should:
+solve one clearly defined bottleneck
+create a usable working system
+improve speed, visibility, and control
+create measurable operational change
+generate proof / before-after evidence
+create a path into further optimisation or support
+The OS states that Phase 1 must be a usable working system that improves speed, visibility, and control in a defined part of the workflow, not a vague transformation project.
+The website should therefore communicate:
+practical implementation
+one bottleneck at a time
+measurable business improvement
+real workflow alignment
+no random one-off AI experiments
+5. ICP / TARGET MARKET
+The website must align with Calon’s real ICP.
+Core ICP
+Founder-led service businesses with real operational friction, where the founder or small leadership team still influences sales, ops, delivery, admin, scheduling, quoting, and reporting.
+Best-fit characteristics
+repeatable service workflow
+manual bottlenecks
+fragmented tools
+founder dependency
+poor visibility
+admin drag
+dropped balls
+handover breakdowns
+opportunity leakage
+Priority sectors for the next 90 days
+These should be the primary website focus:
+Security / FM / Field Service
+Trades / Contractors
+Hospitality / Venues
+Secondary / opportunistic sectors
+These can exist only if handled carefully:
+Recruitment
+Property
+Training
+Care
+The OS is explicit that these are the priority sectors and that broad positioning reduces buyability.
+Important instruction
+The website should not be positioned as if Calon is equally focused on every sector under the sun.
+It should feel focused, controlled, and commercially intentional.
+6. WEBSITE PROBLEMS TO FIX
+The current website has several messaging and architecture issues that must be corrected in the rebuild:
+Problem 1: It is too broad
+It currently feels like it is trying to be relevant to every industry and every AI use case.
+Problem 2: It is too capability-led
+Too much focus on AI categories, agents, tools, and fictional solution language.Not enough focus on workflow bottlenecks, operational pain, and outcome-led implementation.
+Problem 3: It lacks offer discipline
+The three lanes, diagnostic logic, and Phase 1 commercial model are not clearly expressed.
+Problem 4: It sometimes feels speculative
+Some pages read like imagined AI products rather than credible consultancy-led operational builds.
+Problem 5: CTA logic is inconsistent
+Too many different CTA labels and unclear progression.
+Problem 6: Sector pages are uneven
+Some are visually strong but commercially weak or not aligned to current priority sectors.
+Problem 7: The proof story is underpowered
+The projects / examples feel mixed between concept, portfolio, and speculative AI cataloguing.
+Problem 8: It overuses language Calon should avoid
+The OS warns against broad AI-agency language and says to avoid weak, crowded phrasing like AI-first, generic automation talk, and overblown transformation language.
+7. WEBSITE REBUILD OBJECTIVE
+Rebuild the website so it does the following:
+Clearly positions Calon as a founder-led operational systems and automation consultancy
+Makes the offer easy to understand
+Attracts the right kind of buyer
+Screens out weak-fit leads
+Turns qualified visitors into strategy calls / diagnostics
+Feels commercially mature and credible
+Aligns to the actual business model in the OS
+Supports outreach, follow-up, proposals, and case study credibility
+Gives the business a sharper market face immediately
+Creates a repeatable website structure that can support future proof and sector expansion
+8. REQUIRED WEBSITE STRATEGY
+The rebuilt website must follow this commercial logic:
+Core website narrative:
+Positioning → Pain → Offer Structure → Phase 1 → Proof → Process → CTA
+Not:AI trends → features → generic solutions → vague “contact us”
+The website must feel like:“We understand how founder-led service businesses break operationally, and we design practical systems that fix the first serious bottleneck.”
+9. REQUIRED SITE ARCHITECTURE
+Rebuild the website around the following structure.
+A. Homepage
+Purpose:
+communicate positioning immediately
+explain the real pain Calon solves
+show the three-lane model
+introduce the diagnostic / Phase 1 logic
+show proof examples
+explain how Calon works
+move visitors to a strategy call / diagnostic
+B. Solutions Page
+Purpose:
+explain the three lanes clearly
+show what Calon actually builds
+make the offer architecture feel concrete
+connect each lane to real operational outcomes
+Required sections:
+Operational Workspace
+Bespoke Workflows
+Ongoing Optimisation &amp; Support
+C. Sector Pages
+Primary live sectors should be:
+Trades / Contractors
+Security / FM / Field Service
+Hospitality / Venues
+Recruitment
+Property / Facilities
+Optional:secondary sectors only if copy is strong and commercially justified
+Remove / pause / deprioritise:
+sectors that dilute focus and are not aligned with the next 90-day commercial direction
+D. Projects / Proof Page
+Purpose:
+show believable work
+demonstrate bottleneck-to-system-to-outcome logic
+support trust and sales conversations
+E. About Page
+Purpose:
+explain what Calon is and is not
+explain how the company works
+show leadership clearly
+reinforce credibility and operating discipline
+F. Insights / Blog
+Purpose:
+build authority
+support sales conversations
+help prospects understand problems and buying logic
+not just publish generic AI content
+G. Contact / Diagnostic Page
+Purpose:
+make the next step clear
+define who the call is for
+position the call as a serious business conversation, not a generic enquiry form
+10. REQUIRED CTA SYSTEM
+The entire website must be standardised around just a few CTA types.
+Primary CTA options
+Use only one as default across the site:
+Book a Strategy Call
+Book an Operating Bottleneck Diagnostic
+Secondary CTA
+View How We Work
+See Example Builds
+Explore Solutions
+Remove inconsistent CTAs like:
+Let’s Talk
+Get Started Today
+Contact Us
+Book Call
+Read Moreunless context genuinely requires them
+CTA logic must feel controlled, intentional, and commercial.
+11. REQUIRED TONE OF VOICE
+The entire website must sound:
+commercially intelligent
+direct
+operational
+calm and credible
+non-hype
+non-generic
+founder-friendly
+practical
+conversion-aware
+It must not sound:
+inflated
+futuristic for the sake of it
+over-styled
+salesy in a cheap way
+like a SaaS landing page for imaginary products
+like a generic AI agency website
+Language to favour
+operational systems
+bottlenecks
+visibility
+control
+workflow
+handover
+admin drag
+fragmented tools
+founder dependency
+practical implementation
+measurable improvement
+operational workspace
+bespoke workflows
+support and optimisation
+phase 1 build
+connected systems
+centralised visibility
+Language to avoid
+next-gen AI
+cutting-edge AI solutions
+AI-first transformation
+bespoke innovation
+intelligent automation platform
+we automate everything
+end-to-end AI solutions
+generic dashboard language with no workflow grounding
+These language rules are directly supported by the OS.
+12. REQUIRED CONTENT RULES
+Rule 1
+Do not write as though Calon builds generic software products.
+Rule 2
+Do not lead with “AI agents” as the main story.
+Rule 3
+Do not present speculative or fictional enterprise use cases as if they are the business model.
+Rule 4
+Every solution page and sector page must tie back to:
+operational friction
+workflow breakdown
+control
+measurable commercial impact
+Rule 5
+Every page must make it clearer:
+who Calon is for
+what problem Calon solves
+how Calon works
+what the next step is
+Rule 6
+The website must support real sales conversations and discovery calls, not just look visually polished.
+Rule 7
+Do not make the company feel larger, broader, or more corporate than it really is in a way that reduces trust.
+Rule 8
+Keep the business focused around repeatable, credible Phase 1 operational builds.
+The OS states clearly that Calon should avoid broad transformation language, chatbot-first projects, dashboard-only projects, fragmented stacks, and random one-off builds.
+13. REQUIRED PAGE OUTPUT FORMAT
+For every page in the rebuild, produce the following:
+For each page:
+Page objective
+Target visitor
+Role of the page in the sales journey
+Recommended page structure
+Section-by-section breakdown
+Recommended headline for each section
+Subheadline / support copy direction
+Key proof / trust signals needed
+CTA recommendation
+Notes for design / hierarchy / emphasis
+Notes on what to remove from current site
+Notes on what to retain or improve from current site
+Do this for:
+Homepage
+Solutions
+Each live sector page
+Projects / Proof
+About
+Blog / Insights
+Contact / Diagnostic
+14. REQUIRED HOMEPAGE DIRECTION
+The homepage should be rebuilt around this logic:
+Hero
+Clear positioning.State exactly who Calon helps and what it fixes.
+Problem section
+Show the operational friction founder-led service businesses experience.
+What Calon actually does
+Introduce the three lanes.
+Example bottlenecks solved
+Use plain-English examples.
+Phase 1 logic
+Explain how Calon starts.
+Example builds / proof
+Show credible proof-style examples.
+Why Calon works
+Tie back to practical implementation and workflow alignment.
+Process
+Simple, founder-friendly, clear.
+CTA
+Book strategy call / diagnostic.
+The homepage must feel like a commercial landing page for a real consultancy, not a catalogue of AI fantasies.
+15. REQUIRED SECTOR PAGE TEMPLATE
+Every sector page should use the same high-performing structure:
+Hero with sector-specific operational pain
+“You already know the problem” section
+“What actually needs to happen” section
+“What we build for companies like yours” section
+“Why this works” section
+“The real question” commercial framing section
+“How we work” / Phase 1 / process section
+“Maybe this isn’t your bottleneck” qualification section
+CTA to strategy call / diagnostic
+But the tone must be more credible and less speculative than the current pages.
+Sector pages should sound like:
+we understand this operating environment
+we know what breaks
+here is where the margin / time / visibility leakage sits
+here is what a practical first build looks like
+Not:
+here are ten imaginary AI products for your industry
+16. REQUIRED PROJECTS / PROOF PAGE DIRECTION
+Reposition the projects page away from “top projects” and toward:
+Possible page names
+Example Builds
+Proof of Work
+What We’ve Built
+Operational Systems in Practice
+Each proof piece should be structured as:
+client type / sector
+operational bottleneck
+what Calon built
+what changed
+outcomes / operational shift
+lane fit
+likely next-step expansion
+Proof pieces should feel:
+commercial
+practical
+believable
+relevant to live sales conversations
+Avoid:
+gimmicky agent naming
+concept-art-led presentation with weak commercial meaning
+case studies that feel fictional
+The OS says proof capture must be treated as a delivery output and the business needs 2–3 proof assets in progress or complete.
+17. REQUIRED ABOUT PAGE DIRECTION
+The About page should communicate:
+What Calon is
+A focused operational systems and automation consultancy for founder-led service businesses.
+What Calon is not
+Not a generic AI agency, not a chatbot vendor, not a disconnected dashboard firm, not hype-driven.
+How Calon works
+Listen first, diagnose bottlenecks, build around real workflows, support and refine.
+Leadership roles
+Commercial + technical leadership should be clear and credible.
+Process
+Discovery → blueprint → build → launch / optimise
+Trust positioning
+Practical, outcome-led, embedded, credible.
+Use the OS positioning rules and “what Calon is / isn’t” directly as source material.
+18. REQUIRED BLOG / INSIGHTS DIRECTION
+The blog should support commercial education.
+Content pillars should include:
+what operational bottlenecks actually cost
+what a good Phase 1 build looks like
+why most automation projects fail
+how founder-led service businesses should assess workflow friction
+what visibility and control actually mean operationally
+when to use an operational workspace vs workflow build
+how to know if your business has become too founder-dependent
+what to fix first in a messy service workflow
+Avoid blog content that is just:
+generic AI news
+empty thought leadership
+trend summaries with no commercial application
+The OS contains a strong point of view on why most AI and automation projects fail; that should be turned into website and insight content.
+19. REQUIRED DESIGN / HIERARCHY GUIDANCE
+The output should also include design-direction notes.
+The site should feel:
+premium but grounded
+clean and easy to scan
+controlled
+not overloaded
+not “agency flashy”
+more operational credibility than visual noise
+Design principles:
+stronger information hierarchy
+fewer gimmick phrases
+more use of operational pain / system logic
+clearer CTA consistency
+stronger proof blocks
+better use of section transitions
+simpler service architecture
+fewer speculative feature lists
+more plain-English buying logic
+20. REQUIRED FINAL DELIVERABLES
+Your output must include:
+Deliverable 1
+A full website strategy summary in plain English.
+Deliverable 2
+A recommended new sitemap.
+Deliverable 3
+A page-by-page rebuild blueprint.
+Deliverable 4
+A messaging hierarchy for the whole site:
+master positioning
+master subhead
+value proposition
+3 lanes
+Phase 1 logic
+CTA system
+trust signals
+core pain language
+proof language
+Deliverable 5
+A remove / keep / rewrite list for the current site.
+Deliverable 6
+A copy system / voice system for all pages.
+Deliverable 7
+A priority order for implementation today:
+what must be rewritten first
+what can be simplified
+what should be hidden or removed immediately
+what can be improved later
+21. CRITICAL INSTRUCTIONS
+Be decisive.Do not hedge.Do not produce vague UX commentary.Do not just say “improve clarity.”Actually define:
+the structure
+the messaging
+the conversion path
+the strategic focus
+what to cut
+what to rebuild
+what to standardise
+This output must be strong enough that a founder can immediately use it to:
+rewrite the website
+brief a developer
+brief a copywriter
+restructure the live site today
+Everything must align with the Calon OS source material and operating logic, especially:
+positioning
+offer structure
+Phase 1 logic
+priority sectors
+language rules
+fit discipline
+proof orientation
+22. FINAL TASK
+Now produce the full website rebuild / rewire blueprint for Calon AI Solutions using all the instructions above.
+The final output must be:
+exhaustive
+commercially sharp
+highly structured
+practical
+easy to execute from
+aligned to the real business
+written as a serious strategic rebuild document, not a brainstorm
+ADD-ON: SHORTER VERSION TO USE IF THE TOOL HAS LIMITS
+If you need a shorter version for a smaller context window, use this:
+Rebuild the Calon AI Solutions website around this positioning: operational systems and automation for founder-led service businesses. Align the entire site to the Calon OS, including the 3 lanes: Operational Workspace, Bespoke Workflows, and Ongoing Optimisation &amp; Support. Make the website practical, commercially credible, and outcome-led. Remove generic AI-agency language, speculative AI product framing, and over-broad industry positioning. Focus the site on priority sectors: security / FM / field service, trades / contractors, hospitality / venues, with recruitment and property secondary. Rebuild the homepage, solutions page, sector pages, proof/projects page, about page, blog direction, and contact / diagnostic flow. Standardise CTA logic around strategy call / operating bottleneck diagnostic. Produce a full page-by-page website blueprint, messaging hierarchy, sitemap, remove/keep/rewrite list, and implementation order. Base everything on the Calon OS operating model and use language that emphasises bottlenecks, workflow alignment, speed, visibility, control, practical implementation, and measurable Phase 1 builds.

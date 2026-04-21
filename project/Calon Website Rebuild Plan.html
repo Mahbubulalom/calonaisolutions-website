@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Calon — Website Rebuild Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1410;
+    --ink-2:#1C2520;
+    --muted:#5A6660;
+    --line:#E3E1DA;
+    --line-2:#D4D1C7;
+    --paper:#F5F2EA;
+    --paper-2:#EEEAE0;
+    --accent:#2F6F4E;      /* calon-ish operational green */
+    --accent-ink:#143826;
+    --red:#A33B2A;
+    --amber:#B57A1F;
+    --ok:#2F6F4E;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);}
+  body{
+    font-family:'Geist', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    font-feature-settings:"ss01","cv11";
+  }
+  .wrap{max-width:980px;margin:0 auto;padding:72px 40px 160px;}
+  .serif{font-family:'Instrument Serif', 'Times New Roman', serif; font-weight:400; letter-spacing:-0.01em;}
+  .mono{font-family:'Geist Mono', ui-monospace, monospace;}
+
+  /* Masthead */
+  .mast{
+    border-bottom:1px solid var(--line);
+    padding-bottom:28px; margin-bottom:56px;
+    display:grid; grid-template-columns:1fr auto; gap:16px; align-items:end;
+  }
+  .mast .eyebrow{font-family:'Geist Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted);}
+  .mast h1{
+    font-family:'Instrument Serif', serif; font-weight:400;
+    font-size:clamp(48px, 7vw, 88px); line-height:0.98; letter-spacing:-0.02em;
+    margin:12px 0 0;
+  }
+  .mast h1 em{font-style:italic; color:var(--accent-ink);}
+  .mast .meta{font-family:'Geist Mono',monospace; font-size:11px; color:var(--muted); text-align:right; letter-spacing:0.06em;}
+  .mast .meta div + div{margin-top:4px}
+
+  /* TOC */
+  .toc{
+    border:1px solid var(--line); background:#FBFAF4;
+    padding:24px 28px; margin-bottom:72px;
+    columns:2; column-gap:48px;
+  }
+  .toc h4{margin:0 0 14px; font-family:'Geist Mono',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); column-span:all;}
+  .toc ol{margin:0; padding:0; list-style:none; counter-reset:toc;}
+  .toc li{counter-increment:toc; padding:6px 0; border-bottom:1px dotted var(--line); font-size:14px; display:flex; justify-content:space-between; gap:12px;}
+  .toc li:last-child{border-bottom:none}
+  .toc li a{color:var(--ink); text-decoration:none; display:flex; gap:10px; flex:1;}
+  .toc li a:hover{color:var(--accent-ink)}
+  .toc li a::before{content:counter(toc,decimal-leading-zero); font-family:'Geist Mono',monospace; font-size:11px; color:var(--muted); min-width:22px;}
+
+  /* Sections */
+  section{margin:80px 0;}
+  .sec-head{
+    display:grid; grid-template-columns:90px 1fr; gap:24px; align-items:baseline;
+    border-top:1px solid var(--ink); padding-top:20px; margin-bottom:28px;
+  }
+  .sec-head .num{font-family:'Geist Mono',monospace; font-size:12px; letter-spacing:0.12em; color:var(--muted);}
+  .sec-head h2{
+    font-family:'Instrument Serif', serif; font-weight:400;
+    font-size:clamp(32px, 4vw, 46px); line-height:1.02; letter-spacing:-0.015em;
+    margin:0;
+  }
+  h3{font-family:'Geist', sans-serif; font-weight:600; font-size:18px; letter-spacing:-0.005em; margin:32px 0 10px; color:var(--ink);}
+  h4{font-family:'Geist Mono',monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); margin:24px 0 10px;}
+  p{margin:0 0 14px; color:var(--ink-2); max-width:68ch;}
+  p.lead{font-family:'Instrument Serif',serif; font-size:22px; line-height:1.4; color:var(--ink); max-width:60ch;}
+  ul, ol{padding-left:20px; margin:0 0 14px; color:var(--ink-2);}
+  li{margin:4px 0;}
+  strong{color:var(--ink); font-weight:600;}
+  em.soft{font-family:'Instrument Serif',serif; font-style:italic; color:var(--accent-ink); font-size:1.05em;}
+
+  /* Callouts */
+  .callout{
+    border:1px solid var(--line-2); background:#FBFAF4; padding:20px 24px; margin:20px 0;
+    border-left:3px solid var(--accent);
+  }
+  .callout.warn{border-left-color:var(--red); background:#FBF3F0;}
+  .callout.note{border-left-color:var(--amber); background:#FDF8EC;}
+  .callout h4{margin-top:0;}
+  .callout p:last-child{margin-bottom:0;}
+
+  /* Verdict pills */
+  .verdict{
+    display:inline-block; font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase;
+    padding:3px 8px; border-radius:2px; vertical-align:middle; margin-right:8px;
+  }
+  .v-remove{background:#F1D9D3; color:#6F1F12;}
+  .v-rewrite{background:#F4E4C4; color:#5B3D0A;}
+  .v-keep{background:#D6E5DA; color:#1D4A30;}
+  .v-new{background:#DFE0D4; color:#3A401E;}
+
+  /* Compare columns */
+  .compare{display:grid; grid-template-columns:1fr 1fr; gap:28px; margin:20px 0;}
+  .compare .col{border:1px solid var(--line); padding:20px 22px; background:#fff;}
+  .compare .col h4{margin-top:0;}
+  .compare .col.bad{border-left:3px solid var(--red);}
+  .compare .col.good{border-left:3px solid var(--accent);}
+  .compare .col.bad h4{color:#6F1F12;}
+  .compare .col.good h4{color:var(--accent-ink);}
+
+  /* Tables */
+  table{width:100%; border-collapse:collapse; margin:16px 0 24px; font-size:14px;}
+  th, td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top;}
+  th{font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); font-weight:500; background:#FBFAF4;}
+  td code, .codeish{font-family:'Geist Mono',monospace; font-size:12.5px; background:#F2EFE5; padding:1px 6px; border-radius:3px; color:var(--ink);}
+
+  /* Page-plan blocks */
+  .page-card{
+    border:1px solid var(--line); background:#fff; padding:28px 32px; margin:20px 0;
+  }
+  .page-card header{display:flex; justify-content:space-between; align-items:baseline; border-bottom:1px solid var(--line); padding-bottom:10px; margin-bottom:18px;}
+  .page-card header h3{margin:0; font-family:'Instrument Serif',serif; font-size:30px; font-weight:400;}
+  .page-card header .tag{font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted);}
+  .page-card dl{display:grid; grid-template-columns:160px 1fr; gap:6px 20px; margin:0 0 16px;}
+  .page-card dt{font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); padding-top:3px;}
+  .page-card dd{margin:0; color:var(--ink-2);}
+  .page-card .sections{border-top:1px dashed var(--line-2); padding-top:14px; margin-top:12px;}
+  .page-card .sections ol{list-style:none; padding:0; counter-reset:sec;}
+  .page-card .sections li{counter-increment:sec; padding:10px 0; border-bottom:1px dotted var(--line); display:grid; grid-template-columns:34px 1fr; gap:10px;}
+  .page-card .sections li:last-child{border-bottom:none}
+  .page-card .sections li::before{content:counter(sec,decimal-leading-zero); font-family:'Geist Mono',monospace; font-size:10px; color:var(--muted); padding-top:3px;}
+  .page-card .sections .h{font-family:'Instrument Serif',serif; font-size:19px; color:var(--ink); display:block; margin-bottom:2px;}
+  .page-card .sections .sub{font-size:13.5px; color:var(--muted);}
+
+  /* Lane cards */
+  .lanes{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:20px 0;}
+  .lane{border:1px solid var(--line); padding:22px 22px 24px; background:#FBFAF4;}
+  .lane .n{font-family:'Geist Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:0.14em;}
+  .lane h3{font-family:'Instrument Serif',serif; font-size:26px; font-weight:400; margin:6px 0 10px; letter-spacing:-0.01em;}
+  .lane p{font-size:14px; margin-bottom:10px;}
+  .lane ul{font-size:13.5px; padding-left:16px;}
+
+  /* Phase timeline */
+  .phase{display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin:16px 0 8px; counter-reset:p;}
+  .phase .p{border:1px solid var(--line); background:#fff; padding:14px; font-size:13px; position:relative;}
+  .phase .p::before{counter-increment:p; content:"0" counter(p); font-family:'Geist Mono',monospace; font-size:10px; color:var(--muted); display:block; margin-bottom:6px;}
+  .phase .p strong{font-family:'Instrument Serif',serif; font-size:18px; font-weight:400; display:block; margin-bottom:4px;}
+
+  /* CTA matrix */
+  .cta-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .cta-box{border:1px solid var(--line); padding:18px 20px; background:#fff;}
+  .cta-box.primary{border-left:3px solid var(--accent); background:#F4F7F1;}
+  .cta-box.kill{border-left:3px solid var(--red);}
+  .cta-box h4{margin-top:0;}
+  .cta-box ul{font-size:14px; margin-bottom:0;}
+
+  /* Sitemap tree */
+  .sitemap{font-family:'Geist Mono',monospace; font-size:13px; line-height:1.9; background:#0E1410; color:#E3E1DA; padding:24px 28px; border-radius:2px;}
+  .sitemap .root{color:#fff;}
+  .sitemap .hint{color:#8A968F;}
+  .sitemap .kill{color:#D8907F; text-decoration:line-through;}
+  .sitemap .new{color:#A8D5B7;}
+
+  /* Remove/keep/rewrite table */
+  .rkr td:first-child{white-space:nowrap; width:1%;}
+
+  /* Priority matrix */
+  .prio{display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;}
+  .prio .box{border:1px solid var(--line); padding:16px 18px; background:#fff;}
+  .prio .box h4{margin-top:0;}
+  .prio .box.now{border-top:3px solid var(--red);}
+  .prio .box.soon{border-top:3px solid var(--amber);}
+  .prio .box.later{border-top:3px solid var(--accent);}
+  .prio ol{padding-left:18px; font-size:14px; margin:0;}
+
+  /* Footer */
+  footer{margin-top:120px; padding-top:28px; border-top:1px solid var(--line); font-family:'Geist Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:0.08em; display:flex; justify-content:space-between;}
+
+  /* Key-value grid (positioning etc) */
+  .kv{display:grid; grid-template-columns:180px 1fr; gap:14px 24px; margin:10px 0 24px;}
+  .kv dt{font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); padding-top:4px;}
+  .kv dd{margin:0; color:var(--ink-2); font-size:15px;}
+
+  /* Big numeric rails */
+  .rail{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:20px 0 4px;}
+  .rail .r{border-top:1px solid var(--ink); padding-top:12px;}
+  .rail .r .n{font-family:'Instrument Serif',serif; font-size:44px; line-height:1; letter-spacing:-0.02em;}
+  .rail .r .l{font-family:'Geist Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-top:6px;}
+
+  @media (max-width:760px){
+    .wrap{padding:40px 22px 100px}
+    .toc{columns:1}
+    .compare,.lanes,.cta-grid,.phase,.prio{grid-template-columns:1fr}
+    .sec-head{grid-template-columns:1fr}
+    .page-card dl{grid-template-columns:1fr}
+    .kv{grid-template-columns:1fr}
+    .rail{grid-template-columns:repeat(2,1fr)}
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+<header class="mast">
+  <div>
+    <div class="eyebrow">Strategy document · Website rebuild blueprint</div>
+    <h1>Calon, rewired.<br/><em>A website that sells the real business.</em></h1>
+  </div>
+  <div class="meta">
+    <div>Prepared for — Calon AI</div>
+    <div>Scope — calonaisolutions.com</div>
+    <div>Type — Strategy, no design</div>
+    <div>Rev — 01</div>
+  </div>
+</header>
+
+<!-- TOC -->
+<nav class="toc" aria-label="Contents">
+  <h4>Contents</h4>
+  <ol>
+    <li><a href="#summary">Executive summary</a></li>
+    <li><a href="#diagnosis">Diagnosis of the current site</a></li>
+    <li><a href="#positioning">New positioning &amp; messaging hierarchy</a></li>
+    <li><a href="#sitemap">New sitemap</a></li>
+    <li><a href="#pages">Page-by-page rebuild</a></li>
+    <li><a href="#cta">CTA &amp; conversion system</a></li>
+    <li><a href="#voice">Voice &amp; language system</a></li>
+    <li><a href="#rkr">Remove / Keep / Rewrite list</a></li>
+    <li><a href="#priority">Implementation priority</a></li>
+    <li><a href="#design-notes">Notes for the designer</a></li>
+  </ol>
+</nav>
+
+<!-- 1 SUMMARY -->
+<section id="summary">
+  <div class="sec-head"><div class="num">§ 01</div><h2>Executive summary</h2></div>
+
+  <p class="lead">Calon’s current site sells a <em class="soft">generic AI agency</em>. The real business is an <em class="soft">operational systems and automation consultancy for founder-led service businesses</em>. Those are two different companies, and the website is wearing the wrong one.</p>
+
+  <p>The live site leads with chatbots, dashboards, invented product names (“PricePilot AI,” “reactivation engine,” “Voice AI receptionist”) and an industry list of eight-plus sectors — law, healthcare, retail, finance, education, manufacturing, food &amp; beverage, real estate. That is the opposite of Calon’s actual commercial direction. The OS explicitly tells us to narrow to three priority sectors (Security/FM/Field Service, Trades/Contractors, Hospitality/Venues), lead with workflow bottlenecks rather than AI capabilities, and standardise the entry offer around an Operating Bottleneck Diagnostic leading into a defined Phase 1 build.</p>
+
+  <p>This document gives you a complete rebuild: new positioning, new sitemap, page-by-page structure with section headlines and copy direction, a standardised CTA system, a remove/keep/rewrite list against the current pages, and a three-phase implementation order for today, this week, and next month.</p>
+
+  <div class="rail">
+    <div class="r"><div class="n">8 → 3</div><div class="l">Sectors — narrowed</div></div>
+    <div class="r"><div class="n">7</div><div class="l">Current CTAs → 1 primary</div></div>
+    <div class="r"><div class="n">3</div><div class="l">Lanes in the real offer</div></div>
+    <div class="r"><div class="n">1</div><div class="l">Entry door — the Diagnostic</div></div>
+  </div>
+</section>
+
+<!-- 2 DIAGNOSIS -->
+<section id="diagnosis">
+  <div class="sec-head"><div class="num">§ 02</div><h2>Diagnosis of the current site</h2></div>
+
+  <p>Pulled from <span class="codeish">calonaisolutions.com</span>, <span class="codeish">/industries</span>, <span class="codeish">/about</span>, <span class="codeish">/ai-solutions-case-studies…</span>. Eight concrete problems, in order of commercial damage.</p>
+
+  <h3>1. The site is trying to be relevant to everyone</h3>
+  <p>The current Industries page carries eight sectors — Retail, Healthcare, Finance, Manufacturing, Food &amp; Beverage, Hospitality, Education, Real Estate — plus a header line that lists “law, healthcare, retail, finance, education, and beyond.” That breadth signals <em class="soft">generalist</em>. Founder-led service businesses don’t buy from generalists; they buy from specialists who obviously understand their workflow.</p>
+
+  <h3>2. It leads with AI categories, not operational pain</h3>
+  <p>The homepage opens on “Our AI consultancy, Designed to Help You Succeed, Delivered Anywhere – Your Global Partner in Innovation.” It’s capability talk with no workflow inside it. A prospect reading this cannot tell whether Calon is for a 12-person security firm or a FTSE 250 insurer.</p>
+
+  <h3>3. It reads as speculative product marketing</h3>
+  <p>Testimonials reference named products (“PricePilot AI,” “reactivation engine,” “Voice AI receptionist,” “e-commerce chatbot”) with very round numbers (17%, 23%, 28%, 35%, 40%). To the target buyer — a sceptical founder — this reads as invented. The OS explicitly says not to present speculative enterprise use cases as the business model.</p>
+
+  <h3>4. The offer is invisible</h3>
+  <p>The three-lane model (Operational Workspace · Bespoke Workflows · Ongoing Optimisation &amp; Support) is the actual service architecture. It does not appear anywhere on the current site. Without it, the offer looks like “we do AI things.”</p>
+
+  <h3>5. There is no entry door</h3>
+  <p>No Diagnostic. No Phase 1. No defined first step. The CTA is a generic contact form that treats a serious operational conversation and a vendor spam request identically.</p>
+
+  <h3>6. CTA logic is noisy</h3>
+  <p>The live pages mix “Let’s Talk,” “Get Started Today,” “Contact Us,” “Book Call,” “Read More,” and “Learn More About [sector] Solutions” with no hierarchy. Nothing is the primary action.</p>
+
+  <h3>7. Proof is mixed with concept</h3>
+  <p>The case study page describes a chatbot project for a generic “prominent ecommerce company” with no name, no sector detail, no before/after at the workflow level. It reads more like content marketing than proof.</p>
+
+  <h3>8. Language the OS explicitly says to avoid</h3>
+  <p>“Global partner in innovation.” “AI engines powering businesses in law, healthcare, retail, finance, education, and beyond.” “Integrating AI into your existing environment.” These are generic AI-agency phrases the OS flags directly.</p>
+
+  <div class="callout warn">
+    <h4>Net effect</h4>
+    <p>The current site attracts the wrong leads (too broad, too speculative), gives them nothing concrete to buy, and funnels them into a generic contact form. It is actively working against the commercial direction defined in the OS.</p>
+  </div>
+</section>
+
+<!-- 3 POSITIONING -->
+<section id="positioning">
+  <div class="sec-head"><div class="num">§ 03</div><h2>New positioning &amp; messaging hierarchy</h2></div>
+
+  <p>This is the master stack. Every page inherits from it. Nothing on the site should contradict it.</p>
+
+  <h3>Master positioning</h3>
+  <p class="lead"><em class="soft">Operational systems and automation for founder-led service businesses.</em></p>
+
+  <h3>Master subhead</h3>
+  <p class="lead">We replace the manual bottlenecks that run your operation — the quote-to-job handover, the scheduling chaos, the admin drag — with systems built around how you actually work. Clearer visibility, tighter control, measurable first-phase change.</p>
+
+  <h3>Value proposition — in one sentence, three ways</h3>
+  <dl class="kv">
+    <dt>For the homepage</dt>
+    <dd>We fix the operational bottleneck that’s costing you time, margin, and control — then we build around it.</dd>
+    <dt>For outreach</dt>
+    <dd>Founder-led service businesses hit a wall when the workflow depends on one person holding it together. We design the systems that get it off their shoulders.</dd>
+    <dt>For sales calls</dt>
+    <dd>We don’t sell AI. We sell working operational systems. The first build has to earn its place in your day-to-day, or we’ve failed.</dd>
+  </dl>
+
+  <h3>The three lanes</h3>
+  <div class="lanes">
+    <div class="lane">
+      <div class="n">Lane 01 — Control layer</div>
+      <h3>Operational Workspace</h3>
+      <p>One place for visibility, ownership, next steps, reporting. The operating environment the business runs out of, every day.</p>
+      <ul><li>Centralised oversight</li><li>Workflow visibility</li><li>Next-step control</li><li>Reporting integrity</li></ul>
+    </div>
+    <div class="lane">
+      <div class="n">Lane 02 — Execution layer</div>
+      <h3>Bespoke Workflows</h3>
+      <p>Tailored automation built around how you actually operate. Not chatbots bolted on, not a platform to learn — your workflow, encoded.</p>
+      <ul><li>Lead &amp; quote follow-up</li><li>Quote-to-job handover</li><li>Scheduling &amp; dispatch</li><li>Onboarding, admin, reporting</li></ul>
+    </div>
+    <div class="lane">
+      <div class="n">Lane 03 — Compounding layer</div>
+      <h3>Optimisation &amp; Support</h3>
+      <p>The part where most projects fail. Ongoing refinement, training, reporting improvements and system evolution after Phase 1 goes live.</p>
+      <ul><li>Support &amp; training</li><li>Reporting improvements</li><li>Continuous refinement</li><li>System evolution</li></ul>
+    </div>
+  </div>
+
+  <h3>Phase 1 logic — the commercial engine</h3>
+  <p>Every engagement starts the same way: <strong>Operating Bottleneck Diagnostic</strong> → <strong>Phase 1 build</strong> → measurable shift → path into Lane 1 / Lane 3 expansion. Phase 1 removes one clearly defined bottleneck and produces a usable working system. Not a vague transformation. Not a pilot. A system the team uses on Monday.</p>
+
+  <div class="phase">
+    <div class="p"><strong>Diagnostic</strong>Understand the workflow and find the bottleneck.</div>
+    <div class="p"><strong>Map</strong>Current system, handovers, dropped balls, friction points.</div>
+    <div class="p"><strong>Phase 1 build</strong>One bottleneck. One working system. Defined outcome.</div>
+    <div class="p"><strong>Launch</strong>Measurable before/after. Team trained. Live.</div>
+    <div class="p"><strong>Optimise</strong>Lane 1 expansion, Lane 3 support, next bottleneck.</div>
+  </div>
+
+  <h3>ICP — who the site is written for</h3>
+  <p><strong>Primary:</strong> Founder-led service businesses, typically 5–80 staff, with a repeatable service workflow, manual bottlenecks, fragmented tools, and founder dependency. Priority sectors for the next 90 days: <strong>Security / FM / Field Service · Trades / Contractors · Hospitality / Venues.</strong></p>
+  <p><strong>Secondary (optional, handled carefully):</strong> Recruitment, Property, Training, Care — only if copy is strong and the fit is genuine.</p>
+  <p><strong>Not for:</strong> Enterprises buying an “AI strategy,” agencies wanting chatbots, anyone shopping for a platform.</p>
+
+  <h3>Core pain language (site-wide word bank)</h3>
+  <p>Bottleneck · admin drag · dropped balls · handover breakdown · opportunity leakage · fragmented tools · founder dependency · no visibility · the job is done but nobody logged it · the quote went out but nobody chased · the invoice is late because the job sheet is on a van seat.</p>
+
+  <h3>Proof language</h3>
+  <p>Use <em class="soft">bottleneck → build → shift</em> framing. Not percentages without context. Say what broke, what we built, what changed on Monday morning. If we can’t say the client name, say the operating environment (“a 40-vehicle facilities firm,” “a mid-market security contractor,” “a two-site hospitality group”).</p>
+
+  <h3>Language to favour · language to avoid</h3>
+  <div class="compare">
+    <div class="col good">
+      <h4>Favour</h4>
+      <ul>
+        <li>Operational systems</li>
+        <li>Bottlenecks, handovers, drop-offs</li>
+        <li>Visibility, ownership, control</li>
+        <li>Quote-to-job, scheduling, admin</li>
+        <li>Founder dependency</li>
+        <li>Practical implementation</li>
+        <li>Phase 1 build</li>
+        <li>Measurable operational shift</li>
+        <li>Centralised workspace</li>
+      </ul>
+    </div>
+    <div class="col bad">
+      <h4>Avoid</h4>
+      <ul>
+        <li>Next-gen / cutting-edge AI</li>
+        <li>AI-first transformation</li>
+        <li>Intelligent automation platform</li>
+        <li>We automate everything</li>
+        <li>End-to-end AI solutions</li>
+        <li>Global partner in innovation</li>
+        <li>“Powering businesses in [8 sectors]”</li>
+        <li>Named product marketing (PricePilot AI, etc.)</li>
+        <li>Generic “dashboard” / “engine” language</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 4 SITEMAP -->
+<section id="sitemap">
+  <div class="sec-head"><div class="num">§ 04</div><h2>New sitemap</h2></div>
+
+  <p>Flatter, narrower, commercially intentional. Sectors live under Solutions, not as a standalone noun (“Industries”) that implies we serve everyone.</p>
+
+  <div class="sitemap">
+    <div class="root">calonaisolutions.com/</div>
+    <div>├── <span class="new">/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home <span class="hint">— positioning, pain, 3 lanes, Phase 1, proof, CTA</span></div>
+    <div>├── <span class="new">/how-we-work/</span>&nbsp;&nbsp;&nbsp;The three lanes + Phase 1 methodology</div>
+    <div>├── <span class="new">/sectors/</span></div>
+    <div>│&nbsp;&nbsp;&nbsp;├── <span class="new">/security-fm/</span>&nbsp;&nbsp;&nbsp;Security, FM, Field Service <span class="hint">[priority]</span></div>
+    <div>│&nbsp;&nbsp;&nbsp;├── <span class="new">/trades/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trades &amp; Contractors <span class="hint">[priority]</span></div>
+    <div>│&nbsp;&nbsp;&nbsp;├── <span class="new">/hospitality/</span>&nbsp;&nbsp;Hospitality &amp; Venues <span class="hint">[priority]</span></div>
+    <div>│&nbsp;&nbsp;&nbsp;├── <span class="hint">/recruitment/</span>&nbsp;&nbsp;<span class="hint">[secondary — only if copy is strong]</span></div>
+    <div>│&nbsp;&nbsp;&nbsp;└── <span class="hint">/property/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hint">[secondary]</span></div>
+    <div>├── <span class="new">/proof/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example Builds — bottleneck → build → shift</div>
+    <div>├── <span class="new">/about/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Who we are · what we’re not · how we work</div>
+    <div>├── <span class="new">/insights/</span>&nbsp;&nbsp;&nbsp;&nbsp;Insights (not “Blog”) — commercial buying logic</div>
+    <div>└── <span class="new">/diagnostic/</span>&nbsp;&nbsp;Book the Operating Bottleneck Diagnostic <span class="hint">[primary CTA]</span></div>
+    <div>&nbsp;</div>
+    <div class="hint"># Removed or paused</div>
+    <div><span class="kill">/industries/ (8-sector dump)</span></div>
+    <div><span class="kill">/industries/healthcare, /finance, /manufacturing, /food-beverage, /education, /retail, /real-estate</span></div>
+    <div><span class="kill">/boost-your-business-with-a-gpt-assistant/ and similar feature posts</span></div>
+    <div><span class="kill">/ai-solutions-case-studies… (unnamed, unscoped case study)</span></div>
+  </div>
+</section>
+
+<!-- 5 PAGE BLUEPRINTS -->
+<section id="pages">
+  <div class="sec-head"><div class="num">§ 05</div><h2>Page-by-page rebuild</h2></div>
+  <p>For each page: objective, who it’s for, role in the sales journey, section-by-section headlines and copy direction, proof requirement, CTA, design emphasis, and what to cut or keep from the current site.</p>
+
+  <!-- HOMEPAGE -->
+  <article class="page-card">
+    <header><h3>Homepage</h3><span class="tag">/  · primary entry</span></header>
+    <dl>
+      <dt>Objective</dt><dd>Land the positioning in 8 seconds. Move qualified visitors toward the Diagnostic.</dd>
+      <dt>Target visitor</dt><dd>Founder or operations lead of a 5–80 person service business with obvious manual bottlenecks.</dd>
+      <dt>Role in journey</dt><dd>Qualify, frame the problem, show the three lanes and Phase 1 logic, pass to Diagnostic or Proof.</dd>
+      <dt>Primary CTA</dt><dd><span class="codeish">Book an Operating Bottleneck Diagnostic</span></dd>
+      <dt>Secondary CTA</dt><dd>See example builds · How we work</dd>
+    </dl>
+    <div class="sections">
+      <ol>
+        <li><div><span class="h">H1 — Operational systems for founder-led service businesses.</span><span class="sub">Sub: We fix the bottleneck that’s costing you time, margin and control — then we build around it. Directly replaces the current “Global Partner in Innovation” hero.</span></div></li>
+        <li><div><span class="h">Is this you?</span><span class="sub">Plain-English symptom list: quotes going cold, jobs falling through the cracks between sales and ops, the founder still copy-pasting from email to spreadsheet to invoice. Qualifies in, qualifies out.</span></div></li>
+        <li><div><span class="h">What we actually do</span><span class="sub">The three lanes — Operational Workspace, Bespoke Workflows, Ongoing Optimisation — presented as one connected model, not three products. One sentence each, one example each.</span></div></li>
+        <li><div><span class="h">How it starts — the Operating Bottleneck Diagnostic</span><span class="sub">Explain the entry door: a working session to map the workflow, find the bottleneck, scope a Phase 1 build with a measurable outcome. This is the commercial engine of the site.</span></div></li>
+        <li><div><span class="h">Example builds</span><span class="sub">Two or three proof blocks in the bottleneck → build → shift format. Pull from Lane 2 work (scheduling, quote-to-job, lead follow-up). No invented product names.</span></div></li>
+        <li><div><span class="h">Why this works when most AI projects don’t</span><span class="sub">Short POV section: one bottleneck at a time, workflow first, measurable Phase 1, no platform lock-in. Seeds authority for the blog.</span></div></li>
+        <li><div><span class="h">Process</span><span class="sub">Five-step rail — Diagnostic · Map · Build · Launch · Optimise. Same visual language as §03.</span></div></li>
+        <li><div><span class="h">CTA — Book the Diagnostic</span><span class="sub">Full-width, one button, one sentence of qualifying copy (“Best suited to service businesses doing £500k–£10m with real operational friction”).</span></div></li>
+      </ol>
+    </div>
+    <div class="callout"><h4>Remove from current home</h4><p>Hero headline, the 5-item testimonial carousel with named invented products, the “we power law/healthcare/retail/finance/education” line, and the floating contact form.</p></div>
+    <div class="callout note"><h4>Keep / rewrite</h4><p>The “We learn your workflow, your team, your goals” block — the sentiment is right, rewrite in the new voice and promote it into the Is-this-you section.</p></div>
+  </article>
+
+  <!-- HOW WE WORK -->
+  <article class="page-card">
+    <header><h3>How We Work (replaces Solutions/Services)</h3><span class="tag">/how-we-work · offer architecture</span></header>
+    <dl>
+      <dt>Objective</dt><dd>Make the three-lane offer feel concrete and buyable. Show what Phase 1 actually is.</dd>
+      <dt>Target visitor</dt><dd>A returning visitor or someone mid-sales-cycle wanting to understand the engagement model.</dd>
+      <dt>Primary CTA</dt><dd>Book the Diagnostic · See example builds</dd>
+    </dl>
+    <div class="sections">
+      <ol>
+        <li><div><span class="h">Three lanes, one operating model</span><span class="sub">Open with the claim that Calon sells connected operational systems, not isolated tools. Then the three lanes in full.</span></div></li>
+        <li><div><span class="h">Lane 1 — Operational Workspace</span><span class="sub">The control layer. One sentence of what it is. Three bullets of what it replaces (email threads, spreadsheets, WhatsApp, the founder’s head). One example of what it looks like for a field-service business.</span></div></li>
+        <li><div><span class="h">Lane 2 — Bespoke Workflows</span><span class="sub">The execution layer. Same structure. Real workflow examples: quote-to-job handover, scheduling, lead follow-up, onboarding, reporting, invoice/delivery coordination.</span></div></li>
+        <li><div><span class="h">Lane 3 — Ongoing Optimisation &amp; Support</span><span class="sub">The compounding layer. Why projects that stop at launch fail. What ongoing looks like — monthly refinement, training, reporting improvements, next-bottleneck scoping.</span></div></li>
+        <li><div><span class="h">The Phase 1 rule</span><span class="sub">One clearly-defined bottleneck. One usable working system. Measurable before/after. Path into Lane 1 or Lane 3 expansion. The OS discipline, stated plainly.</span></div></li>
+        <li><div><span class="h">How a typical engagement runs</span><span class="sub">Week-by-week or stage-by-stage breakdown. Diagnostic → blueprint → build → launch → optimise. Honest timeframes (weeks, not months of vapour).</span></div></li>
+        <li><div><span class="h">What Calon won’t do</span><span class="sub">Short disqualifier block. No one-off chatbots. No dashboards that don’t change how work happens. No broad “AI strategy” engagements. This is trust-building through refusal.</span></div></li>
+        <li><div><span class="h">CTA</span><span class="sub">Book the Diagnostic · read example builds.</span></div></li>
+      </ol>
+    </div>
+  </article>
+
+  <!-- SECTOR TEMPLATE -->
+  <article class="page-card">
+    <header><h3>Sector page — shared template</h3><span class="tag">/sectors/[priority sector] · three priority pages use this exact structure</span></header>
+    <dl>
+      <dt>Used for</dt><dd>Security/FM/Field Service · Trades/Contractors · Hospitality/Venues</dd>
+      <dt>Objective</dt><dd>Sound like we’ve worked in this environment before. Make one specific bottleneck feel inevitable.</dd>
+      <dt>Primary CTA</dt><dd>Book the Diagnostic</dd>
+    </dl>
+    <div class="sections">
+      <ol>
+        <li><div><span class="h">Hero — the one sentence that proves we understand</span><span class="sub">Sector-specific operational pain, not a generic line. E.g. Security/FM: “When the job sheet is on the van seat, the invoice goes out a week late.” Trades: “You won the job on Tuesday. Nobody’s booked materials yet.” Hospitality: “Rota built by 4pm. Two staff dropped out by 5pm. You’re firefighting until close.”</span></div></li>
+        <li><div><span class="h">You already know the problem</span><span class="sub">A specific list of 4–6 operational failures in this sector. Written as observations, not marketing claims.</span></div></li>
+        <li><div><span class="h">What actually needs to happen</span><span class="sub">The operational shift required — centralised visibility of jobs/shifts/quotes, a clean handover between sales and ops, automation that fires off known triggers.</span></div></li>
+        <li><div><span class="h">What we build for businesses like yours</span><span class="sub">Lane 1 and Lane 2 examples mapped to this sector. Use real workflow names, not invented product names.</span></div></li>
+        <li><div><span class="h">Why this works</span><span class="sub">Workflow-first reasoning. One bottleneck at a time. Built around your process, not the other way around.</span></div></li>
+        <li><div><span class="h">The real question</span><span class="sub">A direct commercial frame: “Not ‘do we need AI?’ It’s ‘what is the handover breakdown costing us every week?’”</span></div></li>
+        <li><div><span class="h">How a Phase 1 for [sector] usually runs</span><span class="sub">Concrete: 2-week diagnostic, 4–8 week build, launch, then Lane 3. Typical scope, typical outcome.</span></div></li>
+        <li><div><span class="h">Maybe this isn’t your bottleneck</span><span class="sub">Qualifying-out block. If you’re under £500k, if you don’t have a repeatable workflow, if you want a chatbot — we’re not the right fit.</span></div></li>
+        <li><div><span class="h">CTA</span><span class="sub">Book the Diagnostic.</span></div></li>
+      </ol>
+    </div>
+    <div class="callout"><h4>Tone note</h4><p>Sector pages should sound like a senior operator talking to a peer, not a vendor pitching. The test: can a founder in this sector read the first screen and feel “yes, that’s my week”?</p></div>
+  </article>
+
+  <!-- PROOF -->
+  <article class="page-card">
+    <header><h3>Proof — Example Builds</h3><span class="tag">/proof · trust layer</span></header>
+    <dl>
+      <dt>Objective</dt><dd>Make believable work visible. Support live sales conversations.</dd>
+      <dt>Primary CTA</dt><dd>Book the Diagnostic</dd>
+    </dl>
+    <div class="sections">
+      <ol>
+        <li><div><span class="h">Intro — what a proof piece means at Calon</span><span class="sub">One paragraph: we show the bottleneck we inherited, the system we built, and the operational shift after launch. We don’t publish projects we wouldn’t walk a prospect through on a call.</span></div></li>
+        <li><div><span class="h">Build card structure (repeat 3–6 times)</span><span class="sub">Client type · sector · operational bottleneck · what we built · what changed · lane fit · likely next-step expansion. One-screen-per-build, scannable.</span></div></li>
+        <li><div><span class="h">CTA — “Your situation isn’t on this page yet”</span><span class="sub">Soft handoff: every engagement starts with the Diagnostic. Book it.</span></div></li>
+      </ol>
+    </div>
+    <div class="callout warn"><h4>Remove</h4><p>The current long-form case study (“AI-powered chatbots transformed customer service for a prominent ecommerce company… 40% rise in customer engagement”). Wrong sector, wrong format, wrong proof framing.</p></div>
+    <div class="callout note"><h4>Proof pipeline</h4><p>OS target: 2–3 proof assets in progress or complete. Treat proof capture as a delivery output — every Phase 1 produces a proof piece as part of the build, not as an afterthought.</p></div>
+  </article>
+
+  <!-- ABOUT -->
+  <article class="page-card">
+    <header><h3>About</h3><span class="tag">/about · credibility</span></header>
+    <dl>
+      <dt>Objective</dt><dd>Make Calon feel small in the right ways (focused, hands-on, founder-available) and serious in the right ways (operating discipline, real methodology).</dd>
+      <dt>Primary CTA</dt><dd>Book the Diagnostic</dd>
+    </dl>
+    <div class="sections">
+      <ol>
+        <li><div><span class="h">What Calon is</span><span class="sub">A focused operational systems and automation consultancy for founder-led service businesses.</span></div></li>
+        <li><div><span class="h">What Calon isn’t</span><span class="sub">Not a generic AI agency. Not a chatbot vendor. Not a dashboard firm. Not an enterprise transformation consultancy. State it directly.</span></div></li>
+        <li><div><span class="h">How we work</span><span class="sub">Listen first. Diagnose the bottleneck. Build around the real workflow. Support and refine. One engagement rhythm, every time.</span></div></li>
+        <li><div><span class="h">Leadership</span><span class="sub">Commercial + technical leads, with roles stated plainly. Retain the existing Rafsan line but rewrite in the new voice — drop “global team of top AI engineers,” keep the operational framing.</span></div></li>
+        <li><div><span class="h">Operating principles</span><span class="sub">Four–six principles: workflow first, Phase 1 discipline, proof as an output, no platform lock-in, founder-adjacent delivery, operational measurement.</span></div></li>
+        <li><div><span class="h">CTA</span><span class="sub">Book the Diagnostic.</span></div></li>
+      </ol>
+    </div>
+  </article>
+
+  <!-- INSIGHTS -->
+  <article class="page-card">
+    <header><h3>Insights (replaces Blog)</h3><span class="tag">/insights · authority &amp; sales support</span></header>
+    <dl>
+      <dt>Objective</dt><dd>Support sales conversations. Make the buying logic obvious. Build the POV behind the brand.</dd>
+      <dt>Primary CTA</dt><dd>Book the Diagnostic (every post)</dd>
+    </dl>
+    <div class="sections">
+      <ol>
+        <li><div><span class="h">Content pillars (not categories — pillars)</span><span class="sub">(1) What operational bottlenecks actually cost. (2) What a good Phase 1 looks like. (3) Why most AI/automation projects fail. (4) Workspace vs workflow: when to use which. (5) Founder-dependency diagnostics. (6) Sector-specific operating analysis (security, trades, hospitality).</span></div></li>
+        <li><div><span class="h">Post format</span><span class="sub">700–1,200 words. Opens on a specific operational scene. Gives a framework. Ends on a Diagnostic CTA. No trend round-ups.</span></div></li>
+      </ol>
+    </div>
+    <div class="callout warn"><h4>Remove</h4><p>Posts like “Boost your business with a GPT assistant” — they belong on a different company’s site. Archive or quietly unpublish.</p></div>
+  </article>
+
+  <!-- DIAGNOSTIC -->
+  <article class="page-card">
+    <header><h3>Diagnostic (replaces Contact)</h3><span class="tag">/diagnostic · conversion</span></header>
+    <dl>
+      <dt>Objective</dt><dd>Make the next step feel like a serious business conversation, not a form submission.</dd>
+      <dt>Primary CTA</dt><dd>Book the call</dd>
+    </dl>
+    <div class="sections">
+      <ol>
+        <li><div><span class="h">What the Diagnostic is</span><span class="sub">A working session. 60–90 minutes. We map your workflow, find the bottleneck, and scope a realistic Phase 1 with a measurable outcome. You walk away with a one-page plan whether you continue with us or not.</span></div></li>
+        <li><div><span class="h">Who it’s for</span><span class="sub">Short fit-filter: service business, £500k+ revenue, real operational friction, founder or senior ops decision-maker on the call. Being explicit here screens out bad-fit leads.</span></div></li>
+        <li><div><span class="h">Who it’s not for</span><span class="sub">Looking for a chatbot. Looking to price-shop an AI vendor. Wanting a general AI-strategy deck.</span></div></li>
+        <li><div><span class="h">What you walk away with</span><span class="sub">A named bottleneck · a scoped Phase 1 · an operational measurement · a decision you can make either way.</span></div></li>
+        <li><div><span class="h">Booking</span><span class="sub">One scheduler (Calendly/Savvycal). Four-field intake: name, company, sector, one sentence on the biggest operational frustration. No 12-field qualifier.</span></div></li>
+      </ol>
+    </div>
+  </article>
+</section>
+
+<!-- 6 CTA -->
+<section id="cta">
+  <div class="sec-head"><div class="num">§ 06</div><h2>CTA &amp; conversion system</h2></div>
+  <p>Seven current CTAs collapse into one primary and three secondary. Everything else is removed or reassigned.</p>
+  <div class="cta-grid">
+    <div class="cta-box primary">
+      <h4>PRIMARY — use everywhere</h4>
+      <ul>
+        <li><strong>Book an Operating Bottleneck Diagnostic</strong></li>
+        <li>Short form: <span class="codeish">Book the Diagnostic</span></li>
+      </ul>
+      <p style="font-size:13.5px; color:var(--muted); margin-top:12px;">Appears as the fixed nav CTA, the homepage final CTA, and the end-of-page CTA on every sector, proof, and about page.</p>
+    </div>
+    <div class="cta-box">
+      <h4>SECONDARY</h4>
+      <ul>
+        <li>See example builds → <span class="codeish">/proof</span></li>
+        <li>How we work → <span class="codeish">/how-we-work</span></li>
+        <li>Is this us? → scroll to sector match</li>
+      </ul>
+    </div>
+    <div class="cta-box kill">
+      <h4>REMOVE</h4>
+      <ul>
+        <li>Let’s Talk</li>
+        <li>Get Started Today</li>
+        <li>Contact Us (as a generic link)</li>
+        <li>Book Call (context-free)</li>
+        <li>Read More / Learn More About [sector] Solutions</li>
+      </ul>
+    </div>
+    <div class="cta-box">
+      <h4>RULES</h4>
+      <ul>
+        <li>One primary per screen.</li>
+        <li>Every page ends with the primary, not a form.</li>
+        <li>Form submissions go to the Diagnostic scheduler, not a “thanks, we’ll be in touch” page.</li>
+        <li>No exit-intent popups. Not this brand.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 7 VOICE -->
+<section id="voice">
+  <div class="sec-head"><div class="num">§ 07</div><h2>Voice &amp; language system</h2></div>
+  <p>The site should read like a senior operator who has done the work, not a vendor selling the category.</p>
+
+  <h3>Voice principles</h3>
+  <ol>
+    <li><strong>Specific before clever.</strong> “The job sheet is on the van seat” beats “we unlock operational excellence.”</li>
+    <li><strong>Operational, not aspirational.</strong> Describe Monday mornings, not futures.</li>
+    <li><strong>Confident refusal.</strong> What Calon won’t do is a feature, not a disclaimer.</li>
+    <li><strong>Short sentences for claims. Longer sentences for context.</strong> Rhythm matters.</li>
+    <li><strong>No emoji. No exclamation marks. No “🚀 transformations.”</strong> Calon is read by founders, not skimmed by TikTok.</li>
+    <li><strong>British English throughout.</strong> Optimisation, organisation, recognise.</li>
+  </ol>
+
+  <h3>Headline pattern library</h3>
+  <div class="compare">
+    <div class="col bad">
+      <h4>Before (current site)</h4>
+      <ul>
+        <li>“Our AI consultancy, Designed to Help You Succeed, Delivered Anywhere – Your Global Partner in Innovation.”</li>
+        <li>“We design AI that evolves with your business.”</li>
+        <li>“We’re the brains behind AI engines powering businesses in law, healthcare, retail, finance, education, and beyond.”</li>
+        <li>“Growth isn’t a tech problem.”</li>
+      </ul>
+    </div>
+    <div class="col good">
+      <h4>After</h4>
+      <ul>
+        <li>“Operational systems for founder-led service businesses.”</li>
+        <li>“We fix the bottleneck that’s costing you time, margin and control — then we build around it.”</li>
+        <li>“Workflow first. One bottleneck at a time. A working system by launch.”</li>
+        <li>“The problem isn’t your tech. It’s the handover between sales and ops.”</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Banned phrases</h3>
+  <p>“Global partner,” “end-to-end AI,” “AI-first,” “intelligent automation platform,” “powering businesses in [5+ sectors],” “designed to help you succeed,” “cutting-edge,” “we automate everything,” “transformation journey,” named fake products (“PricePilot,” “Reactivation Engine,” etc.).</p>
+</section>
+
+<!-- 8 REMOVE/KEEP/REWRITE -->
+<section id="rkr">
+  <div class="sec-head"><div class="num">§ 08</div><h2>Remove · Keep · Rewrite</h2></div>
+  <p>Against the current live site. Acts as the cutting list for whoever executes.</p>
+  <table class="rkr">
+    <thead><tr><th>Action</th><th>Asset</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td><span class="verdict v-remove">Remove</span></td><td>Homepage hero “Global Partner in Innovation”</td><td>Generic agency language. Wrong positioning.</td></tr>
+      <tr><td><span class="verdict v-remove">Remove</span></td><td>Testimonial carousel with named invented products (PricePilot AI, Reactivation Engine, Voice AI receptionist)</td><td>Reads as speculative. OS prohibits.</td></tr>
+      <tr><td><span class="verdict v-remove">Remove</span></td><td>/industries page + Retail, Healthcare, Finance, Manufacturing, Food&amp;Bev, Education, Real Estate sub-pages</td><td>Dilutes focus. Not priority sectors.</td></tr>
+      <tr><td><span class="verdict v-remove">Remove</span></td><td>/ai-solutions-case-studies-real-world-success-stories/ long-form ecommerce chatbot post</td><td>Wrong sector, speculative tone, no named client.</td></tr>
+      <tr><td><span class="verdict v-remove">Remove</span></td><td>/boost-your-business-with-a-gpt-assistant/</td><td>Off-brand feature marketing. Archive.</td></tr>
+      <tr><td><span class="verdict v-remove">Remove</span></td><td>Multi-CTA buttons: Let’s Talk, Get Started Today, Contact Us, Book Call, Learn More</td><td>Replaced by single primary CTA.</td></tr>
+      <tr><td><span class="verdict v-rewrite">Rewrite</span></td><td>Homepage — rebuild to positioning → pain → 3 lanes → Phase 1 → proof → process → CTA</td><td>Per §05 Homepage blueprint.</td></tr>
+      <tr><td><span class="verdict v-rewrite">Rewrite</span></td><td>About page — keep leadership bios, rewrite surrounding copy in new voice</td><td>Structure stays, language changes.</td></tr>
+      <tr><td><span class="verdict v-rewrite">Rewrite</span></td><td>Existing Hospitality industry content</td><td>Only sector overlap with priority list. Rewrite in new template.</td></tr>
+      <tr><td><span class="verdict v-keep">Keep</span></td><td>Domain, core brand name, Rafsan bio (light edit)</td><td>Brand equity.</td></tr>
+      <tr><td><span class="verdict v-keep">Keep</span></td><td>Short genuine testimonials (“understood our workflow,” “saved hours every day”)</td><td>These are credible. Re-attribute or pair with a proof card.</td></tr>
+      <tr><td><span class="verdict v-new">New</span></td><td>/how-we-work page</td><td>The three-lane offer needs its own home.</td></tr>
+      <tr><td><span class="verdict v-new">New</span></td><td>/sectors/security-fm · /sectors/trades · /sectors/hospitality</td><td>Priority sectors, sector template.</td></tr>
+      <tr><td><span class="verdict v-new">New</span></td><td>/proof (Example Builds)</td><td>Replaces case-study page with disciplined format.</td></tr>
+      <tr><td><span class="verdict v-new">New</span></td><td>/diagnostic</td><td>The entry door. Replaces generic Contact.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 9 PRIORITY -->
+<section id="priority">
+  <div class="sec-head"><div class="num">§ 09</div><h2>Implementation priority</h2></div>
+  <p>Three waves. The aim is to stop the site actively hurting the business within 24 hours, then rebuild over 4–6 weeks.</p>
+  <div class="prio">
+    <div class="box now">
+      <h4>Today — stop the bleeding</h4>
+      <ol>
+        <li>Unpublish the /industries hub and the four least-aligned sector sub-pages (Retail, Finance, Manufacturing, Food&amp;Bev, Real Estate, Education). Hold only Hospitality + anything genuinely sold.</li>
+        <li>Remove the invented-product testimonial carousel from the homepage.</li>
+        <li>Replace the hero headline with: <em class="soft">Operational systems for founder-led service businesses.</em> Plain HTML swap, not a redesign.</li>
+        <li>Replace all CTAs with <span class="codeish">Book the Diagnostic</span> pointing to a Calendly link.</li>
+        <li>Unpublish /ai-solutions-case-studies… and /boost-your-business-with-a-gpt-assistant.</li>
+      </ol>
+    </div>
+    <div class="box soon">
+      <h4>Weeks 1–2 — structural rebuild</h4>
+      <ol>
+        <li>Write and ship the new Homepage per §05.</li>
+        <li>Build /how-we-work. This is the second-most-important page on the site.</li>
+        <li>Build /diagnostic.</li>
+        <li>Build /sectors/security-fm with full sector template. Use as reference for the other two.</li>
+        <li>Stand up /proof with 2 example builds, even if placeholders for numbers — bottleneck/build/shift framing from day one.</li>
+      </ol>
+    </div>
+    <div class="box later">
+      <h4>Weeks 3–6 — fill out &amp; compound</h4>
+      <ol>
+        <li>Build /sectors/trades and /sectors/hospitality.</li>
+        <li>Rewrite /about in the new voice.</li>
+        <li>Launch /insights with three foundational posts (“What a good Phase 1 looks like,” “Why most automation projects fail,” “The real cost of founder dependency”).</li>
+        <li>Add a third proof piece. Begin treating proof as a delivery output on every engagement.</li>
+        <li>Commission simple photography or operational imagery — no stock AI brains, no robotic hands.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- 10 DESIGN NOTES -->
+<section id="design-notes">
+  <div class="sec-head"><div class="num">§ 10</div><h2>Notes for the designer</h2></div>
+  <p>We’re not briefing design yet, but the plan assumes a visual system that reinforces the positioning. Guardrails for whoever picks this up next:</p>
+  <ul>
+    <li><strong>Editorial, not agency-flashy.</strong> Stronger hierarchy, calmer palette, more white space, less motion.</li>
+    <li><strong>Serif for positioning, sans for operational copy.</strong> A crisp serif (similar feel to what this document uses) carries the brand voice; a clean sans carries the work.</li>
+    <li><strong>No stock AI imagery.</strong> No brain graphics, no glowing circuits, no robotic hands. Either real operational photography or deliberate typographic layouts.</li>
+    <li><strong>Proof blocks are a designed component.</strong> They’re used on the homepage, the proof page, and sector pages — treat them as a first-class module.</li>
+    <li><strong>CTA consistency is visual, not just verbal.</strong> One button style, one colour, one place.</li>
+    <li><strong>Sector pages share a template.</strong> Design the template once; change only the sector-specific opening scene.</li>
+    <li><strong>The Diagnostic page is the conversion moment.</strong> Treat it like the product page on a DTC site. It earns its own layout.</li>
+  </ul>
+
+  <div class="callout">
+    <h4>What happens next</h4>
+    <p>Approve or redline this plan. Once positioning, sitemap and priority are signed off, we move to visual direction and page-level design — starting with the homepage and <span class="codeish">/how-we-work</span>, then the sector template, then <span class="codeish">/diagnostic</span>.</p>
+  </div>
+</section>
+
+<footer>
+  <div>CALON / WEBSITE REBUILD / PLAN · REV 01</div>
+  <div>Strategy — no design</div>
+</footer>
+
+</main>
+</body>
+</html>
