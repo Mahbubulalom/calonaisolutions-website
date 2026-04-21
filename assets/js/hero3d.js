@@ -30,21 +30,22 @@
     }catch(e){ fallback(); return; }
 
     const scene = new THREE.Scene();
+    const camZ = isMobile ? 9.0 : 5.2; // further back on mobile = smaller blob
     const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
-    camera.position.set(0, 0, 5.2);
+    camera.position.set(0, 0, camZ);
 
     const renderer = new THREE.WebGLRenderer({antialias: !isMobile, alpha: true, powerPreference:'high-performance'});
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setClearColor(0x000000, 0);
     mount.appendChild(renderer.domElement);
 
-    // Lights
-    scene.add(new THREE.AmbientLight(0x3a2a24, 0.45));
-    const keyLight = new THREE.PointLight(0xF5B08A, 3.5, 30, 1.6);
+    // Lights — boosted on mobile for visibility
+    scene.add(new THREE.AmbientLight(0x3a2a24, isMobile ? 0.9 : 0.45));
+    const keyLight = new THREE.PointLight(0xF5B08A, isMobile ? 6.0 : 3.5, 30, 1.6);
     keyLight.position.set(2.5, 2, 3); scene.add(keyLight);
-    const warmLight = new THREE.PointLight(0xE8735C, 2.2, 30, 1.8);
+    const warmLight = new THREE.PointLight(0xE8735C, isMobile ? 4.0 : 2.2, 30, 1.8);
     warmLight.position.set(-2.8, -1.2, 2.4); scene.add(warmLight);
-    const rimLight = new THREE.PointLight(0x5BC8E8, 1.2, 30, 2.0);
+    const rimLight = new THREE.PointLight(0x5BC8E8, isMobile ? 2.5 : 1.2, 30, 2.0);
     rimLight.position.set(0, -3, -2); scene.add(rimLight);
 
     // Organic blob
@@ -53,13 +54,16 @@
 
     const mat = new THREE.MeshStandardMaterial({
       color: 0xF5B08A, roughness: 0.35, metalness: 0.15,
-      emissive: 0xF5B08A, emissiveIntensity: 0.08, flatShading: false
+      emissive: 0xF5B08A, emissiveIntensity: isMobile ? 0.35 : 0.08, flatShading: false
     });
     const mesh = new THREE.Mesh(geo, mat);
+    // shift blob to lower-centre on mobile so it sits below the text
+    if(isMobile) mesh.position.set(0, -0.5, 0);
     scene.add(mesh);
 
-    const wireMat = new THREE.MeshBasicMaterial({color: 0xF5B08A, wireframe:true, transparent:true, opacity: 0.05});
+    const wireMat = new THREE.MeshBasicMaterial({color: 0xF5B08A, wireframe:true, transparent:true, opacity: isMobile ? 0.12 : 0.05});
     const wireMesh = new THREE.Mesh(geo, wireMat);
+    if(isMobile) wireMesh.position.set(0, -0.5, 0);
     scene.add(wireMesh);
 
     // Tiny 3D value-noise
@@ -137,9 +141,8 @@
       mesh.rotation.x = Math.sin(t*0.1)*0.15;
       wireMesh.rotation.copy(mesh.rotation);
 
-      // Scroll-driven zoom
-      const camZ = 5.2 - scrollProgress*3.0;
-      camera.position.z = camZ;
+      // Scroll-driven zoom (pulls closer as you scroll)
+      camera.position.z = camZ - scrollProgress * (isMobile ? 2.0 : 3.0);
       const s = 1 + scrollProgress*0.4;
       mesh.scale.setScalar(s);
       wireMesh.scale.setScalar(s);
