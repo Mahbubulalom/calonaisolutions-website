@@ -256,6 +256,11 @@ section.pad-sm{padding:80px 0;}
 .nav-cta:hover{transform:translateY(-1px); box-shadow:0 8px 24px -6px rgba(91,200,232,0.6);}
 .nav-burger{display:none; background:none; border:none; color:#fff; font-size:24px; cursor:pointer;}
 
+/* Hide JS-injected mobile-only nodes on desktop */
+.nav-main-cta{display:none;}
+.drop-header{display:none;}
+.drop-cta-wrap{display:none;}
+
 @media (max-width:880px){
   /* Kill backdrop-filter on mobile — it creates a containing block that
      traps our position:fixed overlays inside the nav's ~100px box. */
@@ -340,36 +345,50 @@ section.pad-sm{padding:80px 0;}
   .nav-drop a .desc{ display:block; font-size:13px; color:var(--text-muted); margin-top:4px; font-weight:400; }
   /* CTA injected by JS */
   .drop-cta-wrap{
+    display:block;
     padding:28px 24px 48px;
     margin-top:auto;
     border-top:1px solid var(--line-2);
   }
-  .drop-cta-wrap a{
-    display:flex; align-items:center; justify-content:center; gap:10px;
-    width:100%; padding:18px 24px;
-    background:linear-gradient(135deg,#5BC8E8,#37B5D9);
-    color:#0a0e1a; font-family:'Geist',sans-serif;
-    font-size:16px; font-weight:700;
-    border-radius:999px; text-decoration:none; border:none;
-    box-shadow:0 6px 28px -6px rgba(91,200,232,0.45);
-  }
-  /* Bottom CTA injected by JS into .nav-links */
-  .nav-main-cta{
-    width:100%;
-    margin-top:auto;
-    padding:28px 8px 8px;
-    border-top:1px solid var(--line-2);
-    list-style:none;
-  }
+  .drop-cta-wrap a,
   .nav-main-cta a{
-    display:flex; align-items:center; justify-content:center; gap:10px;
-    width:100%; padding:18px 24px;
-    background:linear-gradient(135deg,#5BC8E8,#37B5D9);
-    color:#0a0e1a; font-family:'Geist',sans-serif;
-    font-size:16px; font-weight:700; letter-spacing:0.02em;
+    display:inline-flex; align-items:center; justify-content:center; gap:14px;
+    width:100%;
+    padding:20px 14px 20px 28px;
+    background:linear-gradient(135deg,#8FE0F2 0%, #5BC8E8 45%, #37B5D9 100%);
+    color:#06121A; font-family:'Geist',sans-serif;
+    font-size:15px; font-weight:700; letter-spacing:0.08em;
     text-transform:uppercase;
     border-radius:999px; text-decoration:none; border:none;
-    box-shadow:0 6px 28px -6px rgba(91,200,232,0.45);
+    box-shadow:
+      0 12px 40px -8px rgba(91,200,232,0.7),
+      0 0 0 1px rgba(143,224,242,0.5) inset,
+      0 1px 0 rgba(255,255,255,0.45) inset;
+    transition:transform .2s, box-shadow .2s;
+  }
+  .drop-cta-wrap a:active,
+  .nav-main-cta a:active{
+    transform:scale(0.98);
+  }
+  .drop-cta-wrap a .cta-pill,
+  .nav-main-cta a .cta-pill{
+    width:32px; height:32px; flex:0 0 32px;
+    display:inline-flex; align-items:center; justify-content:center;
+    background:#06121A; color:#5BC8E8;
+    border-radius:50%;
+    font-size:15px; line-height:1;
+    box-shadow:0 2px 10px rgba(0,0,0,0.3);
+  }
+
+  /* Bottom CTA wrapper — only the container; the button styling above
+     is shared between .nav-main-cta a and .drop-cta-wrap a */
+  .nav-main-cta{
+    display:block;
+    width:100%;
+    margin-top:auto;
+    padding:32px 4px 12px;
+    border-top:1px solid var(--line-2);
+    list-style:none;
   }
   .nav-burger{display:block; position:relative; z-index:60;}
   .nav-logo{position:relative; z-index:60;}

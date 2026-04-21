@@ -48,7 +48,7 @@
   if (links && !links.querySelector('.nav-main-cta')) {
     const mainCta = document.createElement('li');
     mainCta.className = 'nav-main-cta';
-    mainCta.innerHTML = `<a href="diagnostic.html">Book a diagnostic →</a>`;
+    mainCta.innerHTML = `<a href="diagnostic.html">Book a diagnostic<span class="cta-pill" aria-hidden="true">↗</span></a>`;
     links.appendChild(mainCta);
   }
 
@@ -75,7 +75,7 @@
     // CTA button
     const ctaWrap = document.createElement('div');
     ctaWrap.className = 'drop-cta-wrap';
-    ctaWrap.innerHTML = `<a href="diagnostic.html">Book a diagnostic →</a>`;
+    ctaWrap.innerHTML = `<a href="diagnostic.html">Book a diagnostic<span class="cta-pill" aria-hidden="true">↗</span></a>`;
     drop.appendChild(ctaWrap);
 
     // Back button closes the dropdown
