@@ -85,12 +85,12 @@ section.pad-sm{padding:80px 0;}
 }
 .nav-inner{
   max-width:var(--maxw); margin:0 auto;
-  padding:14px 32px;
+  padding:20px 32px;
   display:flex; align-items:center; justify-content:space-between;
   gap:24px;
 }
 .nav-logo{display:flex; align-items:center; gap:0; color:#fff;}
-.nav-logo img{height:40px; width:auto; display:block;}
+.nav-logo img{height:52px; width:auto; display:block;}
 .nav-links{display:flex; gap:28px; list-style:none; padding:0; margin:0; align-items:center;}
 .nav-links > li{position:relative;}
 .nav-links > li > a, .nav-links > li > button{
@@ -280,7 +280,7 @@ section.pad-sm{padding:80px 0;}
   }
   .nav-links > li.open > .nav-drop{display:block;}
   .nav-burger{display:block;}
-  .nav-inner{padding:12px 20px; position:relative;}
+  .nav-inner{padding:18px 20px; position:relative;}
   .nav-cta{display:none;}
 }
 .nav.scrolled{
@@ -330,7 +330,7 @@ section.pad-sm{padding:80px 0;}
   top:0;
   height:100vh;
   display:flex; align-items:center;
-  padding-top:80px; /* clear the fixed nav */
+  padding-top:96px; /* clear the fixed nav */
   z-index:3;
   /* content fades as scrollProgress increases — driven by JS-set --p */
   opacity: calc(1 - var(--p, 0) * 1.2);
