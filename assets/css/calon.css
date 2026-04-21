@@ -90,7 +90,7 @@ section.pad-sm{padding:80px 0;}
   gap:24px;
 }
 .nav-logo{display:flex; align-items:center; gap:0; color:#fff;}
-.nav-logo img{height:72px; width:auto; display:block; margin:-12px 0;}
+.nav-logo img{height:40px; width:auto; display:block;}
 .nav-links{display:flex; gap:28px; list-style:none; padding:0; margin:0; align-items:center;}
 .nav-links > li{position:relative;}
 .nav-links > li > a, .nav-links > li > button{
@@ -330,6 +330,7 @@ section.pad-sm{padding:80px 0;}
   top:0;
   height:100vh;
   display:flex; align-items:center;
+  padding-top:80px; /* clear the fixed nav */
   z-index:3;
   /* content fades as scrollProgress increases — driven by JS-set --p */
   opacity: calc(1 - var(--p, 0) * 1.2);
