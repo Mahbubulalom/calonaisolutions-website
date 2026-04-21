@@ -881,3 +881,31 @@ form.diagnostic button{justify-self:start; margin-top:8px;}
 .founder-block{display:grid; gap:22px; max-width:70ch;}
 .founder-block p{font-size:17px; line-height:1.65; color:#C6CBD6;}
 .founder-block p:first-child{color:#E2E6EE;}
+
+
+/* ---------- Real work photo section ---------- */
+.real-work{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:64px;
+  align-items:center;
+}
+.real-work-img{
+  border-radius:12px;
+  overflow:hidden;
+  aspect-ratio:4/3;
+  background:var(--ink-2);
+  border:1px solid var(--line);
+}
+.real-work-img img{
+  width:100%; height:100%;
+  object-fit:cover; display:block;
+}
+.real-work-body p{ max-width:48ch; }
+@media (max-width:880px){
+  .real-work{
+    grid-template-columns:1fr;
+    gap:36px;
+  }
+  .real-work-img{ aspect-ratio:16/10; }
+}
