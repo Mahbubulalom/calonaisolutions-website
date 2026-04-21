@@ -269,16 +269,59 @@ section.pad-sm{padding:80px 0;}
   .nav-links.open{display:flex;}
   .nav-links > li{width:100%;}
   .nav-links > li > a, .nav-links > li > button{
-    display:flex; width:100%; padding:12px 24px;
-    font-size:15px; justify-content:space-between;
+    display:flex; width:100%; padding:16px 24px;
+    font-size:17px; justify-content:space-between;
   }
+  /* Full-screen dropdown panel on mobile */
   .nav-drop{
-    position:static; opacity:1; visibility:visible; transform:none;
-    display:none; background:rgba(255,255,255,0.03);
+    position:fixed; inset:0; z-index:200;
+    display:none; flex-direction:column;
+    background:#05080F;
     border:none; border-radius:0; box-shadow:none;
-    padding:4px 0 8px 36px;
+    padding:0; margin:0;
+    opacity:1; visibility:visible; transform:none;
+    overflow-y:auto;
   }
-  .nav-links > li.open > .nav-drop{display:block;}
+  .nav-links > li.open > .nav-drop{display:flex;}
+  /* Back header injected by JS */
+  .drop-header{
+    display:flex; align-items:center; gap:14px;
+    padding:20px 24px;
+    border-bottom:1px solid var(--line-2);
+    position:sticky; top:0; background:#05080F; z-index:1;
+  }
+  .drop-back{
+    background:none; border:1px solid var(--line-2); color:#fff;
+    font-size:18px; line-height:1; padding:6px 12px; border-radius:6px;
+    cursor:pointer; font-family:inherit;
+  }
+  .drop-title{
+    font-family:'Geist',sans-serif; font-size:16px; font-weight:600; color:#fff;
+  }
+  .drop-links{ flex:1; display:flex; flex-direction:column; padding:8px 0; }
+  .nav-drop a{
+    display:block; padding:20px 28px;
+    font-size:20px; font-weight:500; color:#fff;
+    border-bottom:1px solid var(--line); border-radius:0;
+    transition:background .15s;
+  }
+  .nav-drop a:hover, .nav-drop a:active{ background:rgba(91,200,232,0.07); color:var(--accent); }
+  .nav-drop a .desc{ display:block; font-size:13px; color:var(--text-muted); margin-top:4px; font-weight:400; }
+  /* CTA injected by JS */
+  .drop-cta-wrap{
+    padding:28px 24px 48px;
+    margin-top:auto;
+    border-top:1px solid var(--line-2);
+  }
+  .drop-cta-wrap a{
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    width:100%; padding:18px 24px;
+    background:linear-gradient(135deg,#5BC8E8,#37B5D9);
+    color:#0a0e1a; font-family:'Geist',sans-serif;
+    font-size:16px; font-weight:700;
+    border-radius:999px; text-decoration:none; border:none;
+    box-shadow:0 6px 28px -6px rgba(91,200,232,0.45);
+  }
   .nav-burger{display:block;}
   .nav-inner{padding:18px 20px; position:relative;}
   .nav-cta{display:none;}

@@ -43,6 +43,39 @@
     });
   }
 
+  // Inject full-screen header + CTA into each mobile dropdown (once)
+  document.querySelectorAll('.nav-links > li').forEach(li => {
+    const btn = li.querySelector(':scope > button');
+    const drop = li.querySelector('.nav-drop');
+    if (!btn || !drop) return;
+
+    // Back header
+    const header = document.createElement('div');
+    header.className = 'drop-header';
+    header.innerHTML = `<button class="drop-back" aria-label="Back">←</button><span class="drop-title">${btn.textContent.trim().replace('▾','').trim()}</span>`;
+    drop.prepend(header);
+
+    // Wrap existing links in .drop-links for flex layout
+    const wrapper = document.createElement('div');
+    wrapper.className = 'drop-links';
+    Array.from(drop.children).forEach(child => {
+      if (!child.classList.contains('drop-header')) wrapper.appendChild(child);
+    });
+    drop.appendChild(wrapper);
+
+    // CTA button
+    const ctaWrap = document.createElement('div');
+    ctaWrap.className = 'drop-cta-wrap';
+    ctaWrap.innerHTML = `<a href="diagnostic.html">Book a diagnostic →</a>`;
+    drop.appendChild(ctaWrap);
+
+    // Back button closes the dropdown
+    header.querySelector('.drop-back').addEventListener('click', (e) => {
+      e.stopPropagation();
+      li.classList.remove('open');
+    });
+  });
+
   // Dropdown click/tap handlers (touch devices + keyboard nav)
   document.querySelectorAll('.nav-links > li > button').forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -67,7 +100,7 @@
   const navEl = document.querySelector('.nav');
   if (navEl) navEl.addEventListener('click', e => e.stopPropagation());
 
-  // Close mobile nav when a dropdown link is clicked
+  // Close everything when a dropdown link is clicked
   if (links) {
     links.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => {
