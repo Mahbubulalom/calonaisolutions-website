@@ -90,7 +90,7 @@ section.pad-sm{padding:80px 0;}
   gap:24px;
 }
 .nav-logo{display:flex; align-items:center; gap:0; color:#fff;}
-.nav-logo img{height:52px; width:auto; display:block;}
+.nav-logo img{height:68px; width:auto; display:block;}
 .nav-links{display:flex; gap:28px; list-style:none; padding:0; margin:0; align-items:center;}
 .nav-links > li{position:relative;}
 .nav-links > li > a, .nav-links > li > button{
@@ -1244,3 +1244,15 @@ section:nth-of-type(3n+2) > *{ position:relative; z-index:1; }
 .data tbody tr:hover{ background:rgba(91,200,232,0.03); }
 .data tbody td:first-child{ color:var(--text-muted); }
 .data tbody td:last-child{ color:#fff; font-weight:500; }
+
+/* Legal pages */
+.legal-body{max-width:760px; margin:0 auto; padding:64px 0 96px;}
+.legal-body h2{font-family:'Instrument Serif',serif; font-weight:400; font-size:clamp(22px,2vw,28px); color:var(--text); margin:48px 0 16px;}
+.legal-body h3{font-size:15px; font-weight:600; color:var(--text); margin:32px 0 10px; letter-spacing:0.01em;}
+.legal-body p{font-size:15px; line-height:1.75; color:var(--text-mid); margin:0 0 16px;}
+.legal-body ul{padding-left:20px; margin:0 0 16px;}
+.legal-body ul li{font-size:15px; line-height:1.75; color:var(--text-mid); margin-bottom:8px;}
+.legal-body a{color:var(--accent); text-decoration:none;}
+.legal-body a:hover{text-decoration:underline;}
+.legal-body .updated{font-family:'Geist Mono',monospace; font-size:11px; color:var(--text-faded); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:48px; display:block;}
+.legal-body hr{border:none; border-top:1px solid var(--line); margin:40px 0;}
