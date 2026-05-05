@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calon AI | Operational systems for service businesses that already win</title>
+<link rel="stylesheet" href="styles/main.css">
+<link rel="icon" href="assets/calon-logo.png">
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+<script>
+  window.sendLeadEmail = function(params) {
+    var WEB3FORMS_KEY = 'YOUR_ACCESS_KEY'; // web3forms.com → enter alom@calonaisolutions.com → get key
+
+    var subject = 'New ' + params.form_type + ': ' + (params.company || params.name || params.from_email);
+
+    var message = [
+      params.form_type && ('Type: ' + params.form_type),
+      params.name      && ('Name: ' + params.name),
+      params.from_email && ('Email: ' + params.from_email),
+      params.company   && ('Company: ' + params.company),
+      params.revenue   && ('Revenue: ' + params.revenue),
+      params.sector    && ('Sector: ' + params.sector),
+      params.bottleneck && ('Bottleneck: ' + params.bottleneck),
+    ].filter(Boolean).join('\n');
+
+    return fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject: subject,
+        from_name: 'Calon AI Website',
+        email: params.from_email,
+        message: message,
+        botcheck: '',
+      }),
+    }).then(function(r) {
+      return r.json().then(function(d) {
+        if (!r.ok || !d.success) throw new Error(d.message || 'Send failed');
+        return d;
+      });
+    });
+  };
+</script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" data-presets="react" src="components/Nav.jsx"></script>
+<script type="text/babel" data-presets="react" src="components/Hero.jsx"></script>
+<script type="text/babel" data-presets="react" src="components/Problem.jsx"></script>
+<script type="text/babel" data-presets="react" src="components/Solution.jsx"></script>
+<script type="text/babel" data-presets="react" src="components/Proof.jsx"></script>
+<script type="text/babel" data-presets="react" src="components/RoadmapModal.jsx"></script>
+
+<script type="text/babel" data-presets="react">
+function App() {
+  const [modalOpen, setModalOpen] = React.useState(false);
+  const openModal = React.useCallback(() => setModalOpen(true), []);
+  const closeModal = React.useCallback(() => setModalOpen(false), []);
+
+  React.useEffect(() => {
+    const handler = (e) => {
+      const el = e.target.closest('a[href="#diagnostic"], [data-open-roadmap]');
+      if (el) {
+        e.preventDefault();
+        setModalOpen(true);
+      }
+    };
+    document.addEventListener('click', handler);
+    return () => document.removeEventListener('click', handler);
+  }, []);
+
+  const heroContent = {
+    h1: <>Most service businesses don't have a sales problem. They have an <em>operational</em> one.</>,
+    lead: "Calon builds the systems that recover the 40–60% of margin most £500k–£5m service firms quietly leak, without hiring more people or buying software you won't use."
+  };
+
+  return (
+    <>
+      <Nav />
+      <Hero heroContent={heroContent} show3D={true} bgStyle="grid" />
+      <TrustStrip />
+      <Problem />
+      <Solution />
+      <Sectors />
+      <Proof />
+      <CTA />
+      <Footer />
+      <RoadmapModal open={modalOpen} onClose={closeModal} />
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
